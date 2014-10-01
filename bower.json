@@ -1,0 +1,27 @@
+{
+  "name": "MeanBlog",
+  "version": "0.0.1",
+  "authors": [
+    "Димо Петров <webdude@webdude.eu>"
+  ],
+  "description": "Teamwork assignment for the End-To-End JavaScript Applications course at Telerik Academy",
+  "main": "server.js",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "./public/lib",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.2.25",
+    "angular-resource": "~1.2.25",
+    "toastr": "~2.0.3",
+    "jquery": "~2.1.1",
+    "bootstrap": "~3.2.0",
+    "angular-route": "~1.2.25",
+    "less": "~1.7.5"
+  }
+}
