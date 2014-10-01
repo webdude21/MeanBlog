@@ -1,5 +1,6 @@
 var express = require('express');
 var bodyParser = require('body-parser');
+var mongoose = require('mongoose');
 
 var env = process.env.NODE_ENV || 'development';
 var port = 1234;
@@ -13,6 +14,23 @@ app.use(bodyParser());
 
 app.get('/partials/:partialName', function (req, res) {
     res.render('/partials/' + req.params.partialName)
+
+});
+
+mongoose.connect('mongodb://localhost/MeanBlog');
+var db = mongoose.connection;
+
+db.on('error', function(err){
+    console.warn(err);
+});
+
+db.once('open', function(err, data){
+   if (err){
+       console.warn(err);
+   }else{
+       console.log('Database initialized!')
+   }
+
 
 });
 
