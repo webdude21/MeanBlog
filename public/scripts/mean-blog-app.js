@@ -1,7 +1,7 @@
 'use strict';
 
 var meanBlog = angular
-    .module('meanBlog', ['ngResource', 'ngRoute'])
+    .module('meanBlog', ['ngResource', 'ngRoute', 'ngCookies'])
     .config(function ($routeProvider) {
 
         $routeProvider
@@ -15,7 +15,7 @@ var meanBlog = angular
             })
             .when('/profile', {
                 templateUrl: '/partials/account/profile',
-                controller: 'ProfileController',
+                controller: 'ProfileController'
             })
             .otherwise({redirectTo: '/'});
     })
