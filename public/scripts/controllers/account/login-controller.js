@@ -1,8 +1,8 @@
 meanBlog.controller('LoginController', function ($scope, $location, notifier, identity, auth) {
     $scope.identity = identity;
 
-    $scope.login = function (user) {
-        auth.login(user).then(function (success) {
+    $scope.login = function(user) {
+        auth.login(user).then(function(success) {
             if (success) {
                 notifier.success('Successful login!');
             }
@@ -12,8 +12,8 @@ meanBlog.controller('LoginController', function ($scope, $location, notifier, id
         });
     };
 
-    $scope.logout = function () {
-        auth.logout().then(function () {
+    $scope.logout = function() {
+        auth.logout().then(function() {
             notifier.success('Successful logout!');
             if ($scope.user) {
                 $scope.user.username = '';

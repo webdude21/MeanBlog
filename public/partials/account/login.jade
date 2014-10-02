@@ -5,6 +5,7 @@
             input.form-control(type="password", placeholder="Password", ng-model="user.password")
         button.btn.btn-primary(ng-click="login(user)") Login
         a.btn.btn-primary(href="#/signup") Sign Up
+
     ul.nav.navbar-nav.navbar-right(ng-show="identity.isAuthenticated()")
         li.dropdown
             a.dropdown-toggle(href="", data-toggle="dropdown")
@@ -13,7 +14,7 @@
             ul.dropdown-menu
                 li(ng-show="identity.currentUser.isAdmin()")
                     a(href="#/admin/users") Users
-                li(ng-show="identity.isAuthenticated()")
+                li(ng-hide="identity.isAuthenticated()")
                     a(href="#/profile") Profile
                 li
                     a(href="#" ng-click="logout()") Sign Out

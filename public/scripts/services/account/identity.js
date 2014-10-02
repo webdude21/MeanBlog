@@ -1,28 +1,16 @@
-meanBlog.factory('identity', function (appName, $cookieStore) {
-    var cookieStorageUserKey = appName;
-
-    var currentUser;
+meanBlog.factory('identity', function($window, UsersResource) {
+    var user;
+    if ($window.bootstrappedUserObject) {
+        user = new UsersResource();
+        angular.extend(user, $window.bootstrappedUserObject);
+    }
     return {
-        getCurrentUser: function () {
-            var savedUser = $cookieStore.get(cookieStorageUserKey);
-            if (savedUser) {
-                return savedUser;
-            }
-
-            return currentUser;
+        currentUser: user,
+        isAuthenticated: function() {
+            return !!this.currentUser;
         },
-        setCurrentUser: function (user) {
-            if (user) {
-                $cookieStore.put(cookieStorageUserKey, user);
-            }
-            else {
-                $cookieStore.remove(cookieStorageUserKey);
-            }
-
-            currentUser = user;
-        },
-        isAuthorizedForRole: function (role) {
-            return !!currentUser && currentUser.roles.indexOf(role) > -1;
+        isAuthorizedForRole: function(role) {
+            return !!this.currentUser && this.currentUser.roles.indexOf(role) > -1;
         }
     }
 });
