@@ -12,9 +12,8 @@ app.set('views', __dirname + '/server/views');
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser());
 
-app.get('/partials/:partialName', function (req, res) {
-    res.render('/partials/' + req.params.partialName)
-
+app.get('/partials/:partialArea/:partialName', function(req, res) {
+    res.render('../../public/' + req.params.partialArea + '/' + req.params.partialName)
 });
 
 mongoose.connect('mongodb://localhost/MeanBlog');
@@ -30,7 +29,6 @@ db.once('open', function(err, data){
    }else{
        console.log('Database initialized!')
    }
-
 
 });
 

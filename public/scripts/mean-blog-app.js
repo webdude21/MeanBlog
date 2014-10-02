@@ -6,8 +6,16 @@ var meanBlog = angular
 
         $routeProvider
             .when('/', {
-                templateUrl: 'partials/home.html',
+                templateUrl: 'partials/main/home.html',
                 controller: 'HomeController'
+            })
+            .when('/signup', {
+                templateUrl: '/partials/account/signup',
+                controller: 'SignUpController'
+            })
+            .when('/profile', {
+                templateUrl: '/partials/account/profile',
+                controller: 'ProfileController',
             })
             .otherwise({redirectTo: '/'});
     })
