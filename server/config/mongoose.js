@@ -1,7 +1,5 @@
 var mongoose = require('mongoose');
-var user = require('../models/User');
-var article = require('../models/Article');
-var categories = require('../models/Category');
+var models = require('../models');
 
 module.exports = function (config) {
     mongoose.connect(config.db);
@@ -20,7 +18,7 @@ module.exports = function (config) {
         console.log('Database error: ' + err);
     });
 
-    user.seedInitialUsers();
-    article.seedInitialArticles();
-    categories.seedInitialCategories();
+    models.User.seedInitialUsers();
+    models.Article.seedInitialArticles();
+    models.Category.seedInitialCategories();
 };
