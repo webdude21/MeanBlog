@@ -1,8 +1,9 @@
 var mongoose = require('mongoose');
+var User = mongoose.model('User');
 
 var articleSchema = new mongoose.Schema({
     title: String,
-    author: mongoose.Schema.Types.ObjectId,
+    authors: [User.schema],
     body: String,
     comments: [
         { body: String, date: Date }
@@ -11,12 +12,12 @@ var articleSchema = new mongoose.Schema({
     hidden: Boolean,
     meta: {
         votes: Number,
-        favs: Number
+        favs: Number,
+        tags: [String]
     }
 });
 
 var Article = mongoose.model('Article', articleSchema);
-var User = mongoose.model('User');
 
 module.exports.seedInitialArticles = function () {
     Article.find({}).exec(function (err, collection) {
@@ -31,7 +32,7 @@ module.exports.seedInitialArticles = function () {
             }
 
             if (collection.length === 0) {
-                Article.create({ title: "My first article!", author: user._id, body: "Loren Ipsum goes here!" });
+                Article.create({ title: "My first article!", authors: [user], body: "Loren Ipsum goes here!" });
                 console.log('Articles added to the database');
             }
         });
