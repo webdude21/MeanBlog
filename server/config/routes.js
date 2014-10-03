@@ -10,6 +10,8 @@ module.exports = function (app) {
         res.render('../../public/partials/' + req.params.partialArea + '/' + req.params.partialName)
     });
 
+    app.get('/api/articles/', controllers.articles.all);
+
     app.post('/login', auth.login);
     app.post('/logout', auth.logout);
 
