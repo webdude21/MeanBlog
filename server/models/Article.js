@@ -12,7 +12,6 @@ var articleSchema = new mongoose.Schema({
     hidden: Boolean,
     meta: {
         votes: Number,
-        favs: Number,
         tags: [String]
     }
 });
