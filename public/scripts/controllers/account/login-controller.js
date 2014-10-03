@@ -11,7 +11,7 @@ meanBlog.controller('LoginController', function ($scope, $location, notifier, id
                     notifier.error('Username/Password combination is not valid!');
                 }
             }, function (error) {
-                notifier.error(error.reason);
+                notifier.error(error.data.reason);
             });
     };
 
@@ -23,6 +23,8 @@ meanBlog.controller('LoginController', function ($scope, $location, notifier, id
                 $scope.user.password = '';
             }
             $location.path('/');
+        }, function (error) {
+            notifier.error(error.data.reason);
         })
     }
 });

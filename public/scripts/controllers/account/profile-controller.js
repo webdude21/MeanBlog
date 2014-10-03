@@ -9,6 +9,8 @@ meanBlog.controller('ProfileController', function ($scope, $location, auth, iden
             $scope.firstName = user.firstName;
             $scope.lastName = user.lastName;
             $location.path('/');
+        }, function (error) {
+            notifier.error(error.data.reason);
         });
     }
 });
