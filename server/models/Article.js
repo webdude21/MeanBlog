@@ -1,12 +1,16 @@
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
 
-var articleSchema = new mongoose.Schema({
+var articleSchema = mongoose.Schema({
     title: String,
     author: {
         type: mongoose.Schema.ObjectId,
         ref: 'User'
     },
+    categories: [{
+        type: mongoose.Schema.ObjectId,
+        ref: 'Category'
+    }],
     body: String,
     comments: [
         {
@@ -23,7 +27,6 @@ var articleSchema = new mongoose.Schema({
 });
 
 var Article = mongoose.model('Article', articleSchema);
-
 
 module.exports.seedInitialArticles = function () {
     Article.find({}).exec(function (err, collection) {

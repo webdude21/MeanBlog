@@ -39,7 +39,8 @@ var meanBlog = angular
             .otherwise({redirectTo: '/'});
     })
     .value('toastr', toastr)
-    .constant('appName', 'Mean Blog');
+    .constant('appName', 'Mean Blog')
+    .constant('serverPath', 'http://localhost:1234');
 
 meanBlog.run(function ($rootScope, $location) {
     $rootScope.$on('$routeChangeError', function (ev, current, previous, rejection) {
