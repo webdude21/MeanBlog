@@ -3,6 +3,8 @@ meanBlog.controller('SignUpController', function($scope, $location, auth, notifi
         auth.signup(user).then(function() {
             notifier.success('Registration successful!');
             $location.path('/');
+        }, function (error) {
+            notifier.error(error.data.reason);
         })
     }
 });
