@@ -26,7 +26,7 @@ module.exports.seedInitialCategories = function () {
             }
 
             if (collection.length === 0) {
-                Category.create({ title: "My first category!", articles: [].push(article)});
+                Category.create({ title: "My first category!", articles: [article]});
                 console.log('Categories added to the database');
             }
         });
