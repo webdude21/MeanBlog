@@ -6,7 +6,7 @@
                 .form-group
                     label.col-md-2.control-label(for="title") Title
                     .col-md-10
-                        input.form-control(type="text", placeholder="Title goes here", ng-model="article.title", required)
+                        input.form-control(type="text", placeholder="Title goes here", ng-model="article.title", required="required")
                 .form-group
                     label.col-md-2.control-label(for="categories") Category
                     .col-md-10
@@ -14,11 +14,11 @@
                 .form-group
                     label.col-md-2.control-label(for="body") Body
                     .col-md-10
-                        div(text-angular ng-model="article.body" class="ng-isolate-scope ng-valid ta-bind ng-dirty")
+                        div(text-angular ng-model="article.body" class="ng-isolate-scope ng-valid ta-bind ng-dirty" required="required")
                 .form-group
                     label.col-md-2.control-label(for="meta-tags") Tags
                     .col-md-10
-                        input.form-control(type="text", placeholder="Type your tags here", ng-model="article.tags", required)
+                        input.form-control(type="text", placeholder="Type your tags here", ng-model="article.tags", required="required")
                 .pull-right
-                    button.btn.btn-primary(ng-click="createNew(article)", ng-disabled="signUpForm.$invalid") Create
+                    button.btn.btn-primary(ng-click="createNew(article)", ng-disabled="formIsInvalid(article)") Create
                     a.btn.btn-primary(href="#/") Cancel
