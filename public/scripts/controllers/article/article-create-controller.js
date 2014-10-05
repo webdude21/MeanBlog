@@ -1,4 +1,4 @@
 'use strict';
-meanBlog.controller('ArticleCreateController', function ArticleCreateController($scope, ArticleResource) {
-
+meanBlog.controller('ArticleCreateController', function ArticleCreateController($scope, ArticleResource, CategoryResource) {
+    $scope.categories = CategoryResource.getAllCategories();
 });

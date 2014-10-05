@@ -1,12 +1,12 @@
 'use strict';
-meanBlog.factory('ArticleResource', function ArticleResource($resource) {
-    return $resource('/api/articles/:id', null, {
+meanBlog.factory('CategoryResource', function CategoryResource($resource) {
+    return $resource('/api/categories/:id', null, {
         update: {
             method: 'PUT',
             params: {_id: '@id'},
             isArray: false
         },
-        getAllArticles: {
+        getAllCategories: {
             method: 'GET',
             isArray: true
         }
