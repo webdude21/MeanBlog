@@ -4,6 +4,7 @@ var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var passport = require('passport');
 var morgan = require('morgan');
+var STATIC_DIRECTORY = '/public';
 var secretPassPhrase = 'XZASDIAJSuiasfjuuhasfuhSAFHuhasffaioASJF';
 
 module.exports = function (app, config) {
@@ -19,6 +20,6 @@ module.exports = function (app, config) {
         resave: true}));
     app.use(passport.initialize());
     app.use(passport.session());
-    app.use(express.static(config.rootPath + '/public'));
+    app.use(express.static(config.rootPath + STATIC_DIRECTORY));
     app.use(morgan('combined'));
 };

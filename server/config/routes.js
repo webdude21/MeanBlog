@@ -1,15 +1,13 @@
 var routes = require('../routes');
-var articlesRoutes = '/api/articles/';
-var partialsPath = '../../public/partials/';
-var apiNotFoundRoute = '/api/*';
-var usersRoutes = {main: '/api/users', login: '/login', logout: '/logout'};
+var ARTICLES_ROUTE = '/api/articles/';
+var PARTIALS_PATH = '../../public/partials/';
+var API_NOT_FOUND_ROUTE = '/api/*';
+var USERS_ROUTES = {main: '/api/users', login: '/login', logout: '/logout'};
 
 module.exports = function (app) {
-    routes.usersRouting(usersRoutes, app);
-    routes.partialsRouting(partialsPath, app);
-    routes.articlesRouting(articlesRoutes, app);
-    routes.apiNotFoundRouting(apiNotFoundRoute, app);
-    app.get('*', function (req, res) {
-        res.render('index', {currentUser: req.user});
-    });
+    routes.usersRouting(USERS_ROUTES, app);
+    routes.partialsRouting(PARTIALS_PATH, app);
+    routes.articlesRouting(ARTICLES_ROUTE, app);
+    routes.apiNotFoundRouting(API_NOT_FOUND_ROUTE, app);
+    routes.defaultRouting(app);
 };
