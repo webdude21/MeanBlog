@@ -1,28 +1,14 @@
-var auth = require('./auth');
-var controllers = require('../controllers');
-var usersRoute = '/api/users';
-var articlesRoute = '/api/articles/';
+var routes = require('../routes');
+var articlesRoutes = '/api/articles/';
+var partialsPath = '../../public/partials/';
+var apiNotFoundRoute = '/api/*';
+var usersRoutes = {main: '/api/users', login: '/login', logout: '/logout'};
 
 module.exports = function (app) {
-    app.route(usersRoute)
-        .get(auth.isInRole('admin'), controllers.users.getAllUsers)
-        .post(controllers.users.createUser)
-        .put(auth.isAuthenticated, controllers.users.updateUser);
-
-    app.get('/partials/:partialArea/:partialName', function (req, res) {
-        res.render('../../public/partials/' + req.params.partialArea + '/' + req.params.partialName)
-    });
-
-    app.get(articlesRoute, controllers.articles.all);
-
-    app.post('/login', auth.login);
-    app.post('/logout', auth.logout);
-
-    app.get('/api/*', function (req, res) {
-        res.status(404);
-        res.end();
-    });
-
+    routes.usersRouting(usersRoutes, app);
+    routes.partialsRouting(partialsPath, app);
+    routes.articlesRouting(articlesRoutes, app);
+    routes.apiNotFoundRouting(apiNotFoundRoute, app);
     app.get('*', function (req, res) {
         res.render('index', {currentUser: req.user});
     });

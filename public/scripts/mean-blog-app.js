@@ -26,6 +26,10 @@ var meanBlog = angular
                 templateUrl: '/partials/account/signup',
                 controller: 'SignUpController'
             })
+            .when('/articles', {
+                templateUrl: '/partials/article/articles',
+                controller: 'ArticlesController'
+            })
             .when('/profile', {
                 templateUrl: '/partials/account/profile',
                 controller: 'ProfileController',
