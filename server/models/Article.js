@@ -7,10 +7,10 @@ var articleSchema = mongoose.Schema({
         type: mongoose.Schema.ObjectId,
         ref: 'User'
     },
-    categories: [{
+    category: {
         type: mongoose.Schema.ObjectId,
         ref: 'Category'
-    }],
+    },
     body: String,
     comments: [
         {

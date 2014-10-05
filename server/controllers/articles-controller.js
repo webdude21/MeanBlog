@@ -12,7 +12,7 @@ var _ = require('lodash');
  * Find article by id
  */
 exports.article = function (request, response, next, id) {
-    Article.load.populate('author categories')(id, function (err, article) {
+    Article.load.populate('author category')(id, function (err, article) {
         if (err) {
             return next(err);
         }
@@ -89,7 +89,7 @@ exports.show = function (req, res) {
  * List of Articles
  */
 exports.all = function (req, res) {
-    Article.find().sort('-created').populate('author categories').exec(function (err, articles) {
+    Article.find().sort('-created').populate('author category').exec(function (err, articles) {
         if (err) {
             return res.json(500, {
                 error: 'Cannot list the articles'

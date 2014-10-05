@@ -9,10 +9,13 @@ function ArticleViewModel(article) {
         username: article.author.username,
         id: article.author._id
     };
-    this.category = {
-        title: article.category.title,
-        id: article.category._id
-    };
+
+    if (article.category){
+        this.category = {
+            title: article.category.title,
+            id: article.category._id
+        };
+    }
     this.body = article.body;
     this.comments = article.comments;
     this.date = article.date;

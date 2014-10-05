@@ -16,7 +16,7 @@ var Category = mongoose.model('Category', categorySchema);
 module.exports.seedInitialCategories = function () {
     Category.find({}).exec(function (err, collection) {
         if (err) {
-            console.log('Cannot find categories: ' + err);
+            console.log('Cannot find category: ' + err);
             return;
         }
 
