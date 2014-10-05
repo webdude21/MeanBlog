@@ -1,4 +1,4 @@
 'use strict';
-meanBlog.controller('HomeController', function HomeController($scope) {
-
+meanBlog.controller('HomeController', function HomeController($scope, identity) {
+    $scope.identity = identity;
 });

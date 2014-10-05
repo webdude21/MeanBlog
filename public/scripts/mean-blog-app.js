@@ -1,8 +1,8 @@
 'use strict';
 
 var meanBlog = angular
-    .module('meanBlog', ['ngResource', 'ngRoute', 'ngCookies'])
-    .config(function ($routeProvider, $locationProvider) {
+    .module('meanBlog', ['ngResource', 'ngRoute', 'ngCookies', 'textAngular'])
+    .config(function ($routeProvider) {
 
         var routeUserChecks = {
             adminRole: {
@@ -26,9 +26,13 @@ var meanBlog = angular
                 templateUrl: '/partials/account/signup',
                 controller: 'SignUpController'
             })
-            .when('/articles', {
+            .when('/articles/all', {
                 templateUrl: '/partials/article/articles',
                 controller: 'ArticlesController'
+            })
+            .when('/articles/create', {
+                templateUrl: '/partials/article/create',
+                controller: 'ArticleCreateController'
             })
             .when('/profile', {
                 templateUrl: '/partials/account/profile',

@@ -15,8 +15,15 @@ block main-content
                         a(href="#/") Home
                     li
                         a(href="#/categories") Categories
-                    li
-                        a(href="#/articles") Articles
+                    li.dropdown
+                        a.dropdown-toggle(href="", data-toggle="dropdown")
+                            | Articles
+                            span.caret
+                        ul.dropdown-menu
+                            li
+                                a(href="#/articles/all") List articles
+                            li
+                                a(href="#/articles/create") Create an article
                 div(ng-include="'partials/account/login'")
     section
         div(ng-view)
