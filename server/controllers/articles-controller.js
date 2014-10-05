@@ -101,6 +101,5 @@ exports.all = function (req, res) {
             resultArticles.push(viewModels.ArticleViewModel.getArticleViewModelFromArticle(article))
         });
         res.json(resultArticles);
-
     });
 };
