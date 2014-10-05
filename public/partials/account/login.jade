@@ -14,7 +14,7 @@
             ul.dropdown-menu
                 li(ng-show="identity.currentUser.isAdmin()")
                     a(href="#/admin/users") Users
-                li(ng-hide="identity.isAuthenticated()")
+                li(ng-show="identity.isAuthenticated()")
                     a(href="#/profile") Profile
                 li
                     a(href="#" ng-click="logout()") Sign Out

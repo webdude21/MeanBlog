@@ -1,7 +1,8 @@
 .article-container.jumbotron
-    h2 {{article.title}}
-    .article-body {{article.body}}
+    h2.text-center {{article.title}}
+    .article-body.text-justify {{article.body}}
     .comments-section
         p(ng-repeat="comment in article.comments") {{comment}}
-    span.label.label-primary.pull-right Author: {{article.author}}
+    hr
+    a.label.label-primary.pull-right(href="/users/{{article.author.id}}") Author: {{article.author.username}}
     span.label.label-primary.pull-left published on: {{article.date | date: 'medium'}}
