@@ -8,8 +8,9 @@ meanBlog.factory('UsersResource', function($resource) {
 
     UsersResource.prototype.isPublisher = function() {
         var authorized = false;
+        var that = this;
         AUTHORIZED_PUBLISHER_ROLES.forEach(function (role) {
-            if (this.roles && this.roles.indexOf(role) > -1) {
+            if (that.roles && that.roles.indexOf(role) > -1) {
                 authorized = true;
             }
         });

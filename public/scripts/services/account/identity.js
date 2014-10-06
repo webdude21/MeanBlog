@@ -17,9 +17,10 @@ meanBlog.factory('identity', function($window, UsersResource) {
                 throw new Error('The method expects ana array');
             }
 
+            var that = this;
             var authorized = false;
             roles.forEach(function (role) {
-                if (this.currentUser && this.currentUser.roles.indexOf(role) > -1) {
+                if (that.isAuthorizedForRole.call(that, role)) {
                     authorized = true;
                 }
             });

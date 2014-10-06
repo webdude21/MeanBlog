@@ -75,7 +75,10 @@ meanBlog.factory('auth', function ($http, $q, identity, UsersResource) {
             if (!(roles instanceof Array)) {
                 throw new Error('The method expects ana array');
             }
-            else {
+
+            if (identity.isAuthorizedForAnyOfTheFollowingRoles(roles)){
+                return true;
+            } else {
                 return $q.reject('not authorized');
             }
         }

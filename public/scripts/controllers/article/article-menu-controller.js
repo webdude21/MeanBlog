@@ -1,4 +1,4 @@
 'use strict';
-meanBlog.controller('ArticleMenuController', function ArticleCreateController($scope, identity) {
+meanBlog.controller('ArticleMenuController', function ArticleMenuController($scope, identity) {
     $scope.identity = identity;
 });
