@@ -8,14 +8,10 @@ module.exports = {
     getArticleById: function (req, res) {
         Article.findById(req.params.articleId).populate('author category').exec(function (err, article) {
             if (err) {
-                return res.json(500, {
-                    reason: 'Cannot find an article with such id'
-                });
+                return res.status(400).json({reason: 'Cannot find an article with such id'});
             }
-            if (!article){
-                return res.json(400, {
-                    reason: 'Cannot find an article with such id'
-                });
+            if (!article) {
+                return res.status(400).json({reason: 'Cannot find an article with such id'});
             }
 
             res.json(viewModels.ArticleViewModel.getArticleViewModelFromArticle(article));
@@ -28,9 +24,7 @@ module.exports = {
         article.save(function (err) {
             if (err) {
                 console.log(err);
-                return res.json(500, {
-                    reason: 'Cannot save the article'
-                });
+                return res.status(400).json({reason: 'Cannot save the article'});
             }
             res.json(article);
         });
@@ -42,9 +36,7 @@ module.exports = {
 
         article.save(function (err) {
             if (err) {
-                return res.json(500, {
-                    reason: 'Cannot update the article'
-                });
+                return res.status(400).json({reason: 'Cannot update the article'});
             }
             res.json(article);
 
@@ -55,9 +47,7 @@ module.exports = {
 
         article.remove(function (err) {
             if (err) {
-                return res.json(500, {
-                    reason: 'Cannot delete the article'
-                });
+                return res.status(400).json({reason: 'Cannot delete the article'});
             }
             res.json(article);
 
@@ -69,9 +59,7 @@ module.exports = {
     all: function (req, res) {
         Article.find().sort('-created').populate('author category').exec(function (err, articles) {
             if (err) {
-                return res.json(500, {
-                    reason: 'Cannot list the articles'
-                });
+                return res.status(400).json({reason: 'Cannot list the articles'});
             }
 
             var resultArticles = [];

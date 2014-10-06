@@ -1,5 +1,7 @@
 var mongoose = require('mongoose');
+var sampleData = require('./sample-data');
 var User = mongoose.model('User');
+
 
 var articleSchema = mongoose.Schema({
     title: String,
@@ -41,7 +43,8 @@ module.exports.seedInitialArticles = function () {
             }
 
             if (collection.length === 0) {
-                Article.create({ title: "My first article!", author: user, body: "Loren Ipsum goes here!" });
+                Article.create({ title: sampleData.title, author: user, body: sampleData.body,
+                    mata: {tags: sampleData.tags} });
                 console.log('Articles added to the database');
             }
         });
