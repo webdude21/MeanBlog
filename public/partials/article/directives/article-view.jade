@@ -1,7 +1,10 @@
 .article-container.jumbotron(ng-hide="article.hidden && !identity.currentUser.isPublisher()")
+    div(ng-show="identity.currentUser.isPublisher()")
+        a.label.label-primary.pull-right(href="#/articles/edit/{{article.id}}") Edit
+        span.label.label-primary.pull-right Status: {{ article.hidden ? "hidden" : "public"}}
+    span.label.label-primary.pull-left Category: {{ article.category ? article.category.title : "n/a"}}
     h2.text-center
         a(href="#/articles/{{article.id}}" ) {{article.title}}
-        a.pull-right.btn.btn-primary(href="#/articles/edit/{{article.id}}" ng-show="identity.currentUser.isPublisher()") Edit
     hr
     .article-body.text-justify(ng-bind-html="article.body")
     .comments-section

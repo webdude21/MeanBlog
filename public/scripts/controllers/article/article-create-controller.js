@@ -21,6 +21,6 @@ meanBlog.controller('ArticleCreateController', function ArticleCreateController(
             tags: extractTags(article)
         };
         ArticleResource.save(article);
-        $scope.getArticleById = {};
+        $scope.article = {};
     };
 });
