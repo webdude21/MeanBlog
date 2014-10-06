@@ -43,7 +43,7 @@ module.exports.seedInitialArticles = function () {
             }
 
             if (collection.length === 0) {
-                Article.create({ title: sampleData.title, author: user, body: sampleData.body,
+                Article.create({ title: sampleData.title, author: user, hidden: false, body: sampleData.body,
                     mata: {tags: sampleData.tags} });
                 console.log('Articles added to the database');
             }

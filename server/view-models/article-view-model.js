@@ -18,6 +18,7 @@ function ArticleViewModel(article) {
         };
     }
     this.body = article.body;
+    this.hidden = article.hidden;
     this.comments = article.comments;
     this.date = article.date;
     this.meta = article.meta;

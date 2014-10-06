@@ -1,4 +1,4 @@
-.article-container.jumbotron
+.article-container.jumbotron(ng-hide="article.hidden && !identity.currentUser.isPublisher()")
     h2.text-center
         a(href="#/articles/{{article.id}}" ) {{article.title}}
         a.pull-right.btn.btn-primary(href="#/articles/edit/{{article.id}}" ng-show="identity.currentUser.isPublisher()") Edit

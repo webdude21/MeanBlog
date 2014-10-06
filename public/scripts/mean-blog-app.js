@@ -40,8 +40,13 @@ var meanBlog = angular
                 controller: 'ArticleCreateController',
                 resolve: routeUserChecks.publisherRoles
             })
+            .when('/articles/edit/:id', {
+                templateUrl: '/partials/article/edit',
+                controller: 'ArticleEditController',
+                resolve: routeUserChecks.publisherRoles
+            })
             .when('/articles/:id', {
-                templateUrl: '/partials/article/article-detail',
+                templateUrl: '/partials/article/detail',
                 controller: 'ArticleDetailController'
             })
             .when('/profile', {
