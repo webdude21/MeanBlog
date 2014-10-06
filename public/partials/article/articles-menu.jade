@@ -1,0 +1,8 @@
+a.dropdown-toggle(href="", data-toggle="dropdown")
+    | Articles
+    span.caret
+ul.dropdown-menu
+    li
+        a(href="#/articles/all") List articles
+    li
+        a(ng-show="identity.currentUser.isPublisher()" href="#/articles/create") Create an article
