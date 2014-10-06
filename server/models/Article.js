@@ -25,7 +25,16 @@ var articleSchema = mongoose.Schema({
     meta: {
         votes: Number,
         tags: [String]
-    }
+    },
+    updates: [
+        {
+            by: {
+                type: mongoose.Schema.ObjectId,
+                ref: 'User'
+            },
+            date: { type: Date, default: Date.now }
+        }
+    ]
 });
 
 var Article = mongoose.model('Article', articleSchema);

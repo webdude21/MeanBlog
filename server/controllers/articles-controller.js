@@ -30,16 +30,29 @@ module.exports = {
         });
     },
     update: function (req, res) {
-        var article = req.article;
-
-        article = _.extend(article, req.body);
-
-        article.save(function (err) {
+        var updatedArticle = req.body;
+        Article.findById(updatedArticle.id).exec(function(err, article){
             if (err) {
-                return res.status(400).json({reason: 'Cannot update the article'});
+                return res.status(400).json({reason: 'Cannot find an article with such id'});
             }
-            res.json(article);
+            if (!article) {
+                return res.status(400).json({reason: 'Cannot find an article with such id'});
+            }
 
+            article.title = updatedArticle.title;
+            article.body = updatedArticle.body;
+            article.meta.tags = updatedArticle.meta.tags;
+            article.category = updatedArticle.category;
+            article.updates.push({
+                by: req.user
+            });
+
+            article.save(function (err) {
+                if (err) {
+                    return res.status(400).json({reason: 'Cannot update the article'});
+                }
+                res.json(article);
+            });
         });
     },
     destroy: function (req, res) {
