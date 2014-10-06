@@ -26,13 +26,13 @@ var meanBlog = angular
                 templateUrl: '/partials/account/signup',
                 controller: 'SignUpController'
             })
-            .when('/articles/:id', {
-                templateUrl: '/partials/article/article-detail',
-                controller: 'ArticleDetailController'
-            })
             .when('/articles/all', {
                 templateUrl: '/partials/article/articles',
                 controller: 'ArticlesController'
+            })
+            .when('/articles/:id', {
+                templateUrl: '/partials/article/article-detail',
+                controller: 'ArticleDetailController'
             })
             .when('/articles/create', {
                 templateUrl: '/partials/article/create',

@@ -3,13 +3,7 @@ meanBlog.factory('ArticleResource', function ArticleResource($resource) {
     return $resource('/api/articles/:id', null, {
         getById: {
             method: 'GET',
-            params: {id: '@id'},
-            isArray: false
-        },
-        update: {
-            method: 'PUT',
-            params: {_id: '@id'},
-            isArray: false
+            params: {id: '@id'}
         },
         getAllArticles: {
             method: 'GET',

@@ -8,7 +8,7 @@ module.exports = function (articlesRoute, app) {
         .post(auth.isAuthenticated, auth.isInRole(AUTHORIZED_PUBLISHER_ROLES), controllers.articles.createNew);
 
     app.route(articlesRoute + ':articleId')
-        .get(controllers.articles.article)
+        .get(controllers.articles.getArticleById)
         .put(auth.isAuthenticated, auth.isInRole(AUTHORIZED_PUBLISHER_ROLES), controllers.articles.update)
         .delete(auth.isAuthenticated, auth.isInRole(AUTHORIZED_PUBLISHER_ROLES), controllers.articles.destroy);
 };

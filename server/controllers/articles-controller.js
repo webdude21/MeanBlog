@@ -5,16 +5,20 @@ var Article = mongoose.model('Article');
 var _ = require('lodash');
 
 module.exports = {
-    article: function (request, response, next, id) {
-        Article.load.populate('author category')(id, function (err, article) {
+    getArticleById: function (req, res) {
+        Article.findById(req.params.articleId).populate('author category').exec(function (err, article) {
             if (err) {
-                return next(err);
+                return res.json(500, {
+                    reason: 'Cannot find an article with such id'
+                });
             }
-            if (!article) {
-                return next(new Error('Failed to load article ' + id));
+            if (!article){
+                return res.json(400, {
+                    reason: 'Cannot find an article with such id'
+                });
             }
-            request.article = viewModels.ArticleViewModel.getArticleViewModelFromArticle(article);
-            next();
+
+            res.json(viewModels.ArticleViewModel.getArticleViewModelFromArticle(article));
         });
     },
     createNew: function (req, res) {
@@ -29,7 +33,6 @@ module.exports = {
                 });
             }
             res.json(article);
-
         });
     },
     update: function (req, res) {
