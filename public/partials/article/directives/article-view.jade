@@ -1,5 +1,7 @@
 .article-container.jumbotron
-    h2.text-center {{article.title}}
+    h2.text-center
+        a(href="/articles/{{article.id}}" ) {{article.title}}
+    hr
     .article-body.text-justify(ng-bind-html="article.body")
     .comments-section
         p(ng-repeat="comment in article.comments") {{comment}}

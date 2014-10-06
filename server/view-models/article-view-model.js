@@ -4,6 +4,7 @@ var User = mongoose.model('User');
 var Category = mongoose.model('Category');
 
 function ArticleViewModel(article) {
+    this.id = article._id;
     this.title = article.title;
     this.author = {
         username: article.author.username,
