@@ -29,12 +29,18 @@ module.exports = {
             next();
         }
     },
-    isInRole: function (role) {
+    isInRole: function (roles) {
         return function (req, res, next) {
-            if (req.isAuthenticated() && req.user.roles.indexOf(role) > -1) {
+
+            if (roles instanceof Array) {
+                roles.forEach(function (role) {
+                    if (req.isAuthenticated() && req.user.roles.indexOf(role) > -1) {
+                        next();
+                    }
+                });
+            } else if (req.isAuthenticated() && req.user.roles.indexOf(roles) > -1) {
                 next();
-            }
-            else {
+            } else {
                 res.status(403);
                 res.end();
             }

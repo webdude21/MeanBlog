@@ -1,6 +1,6 @@
 .article-container.jumbotron
     h2.text-center {{article.title}}
-    .article-body.text-justify {{article.body}}
+    .article-body.text-justify(ng-bind-html="article.body")
     .comments-section
         p(ng-repeat="comment in article.comments") {{comment}}
     hr
