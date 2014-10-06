@@ -70,6 +70,15 @@ meanBlog.factory('auth', function ($http, $q, identity, UsersResource) {
             else {
                 return $q.reject('not authorized');
             }
+        },
+        isAuthorizedForAnyOfTheFollowingRoles: function (roles) {
+            if (!(roles instanceof Array)) {
+                throw new Error('The method expects ana array');
+            }
+            else {
+                return $q.reject('not authorized');
+            }
         }
+
     }
 });

@@ -3,8 +3,13 @@
 var meanBlog = angular
     .module('meanBlog', ['ngResource', 'ngRoute', 'ngCookies', 'textAngular'])
     .config(function ($routeProvider) {
-
+        var AUTHORIZED_PUBLISHER_ROLES = ['admin', 'editor', 'contributor'];
         var routeUserChecks = {
+            publisherRoles: {
+                authenticate: function (auth) {
+                    return auth.isAuthorizedForAnyOfTheFollowingRoles(AUTHORIZED_PUBLISHER_ROLES);
+                }
+            },
             adminRole: {
                 authenticate: function (auth) {
                     return auth.isAuthorizedForRole('admin');
@@ -30,13 +35,14 @@ var meanBlog = angular
                 templateUrl: '/partials/article/articles',
                 controller: 'ArticlesController'
             })
+            .when('/articles/create', {
+                templateUrl: '/partials/article/create',
+                controller: 'ArticleCreateController',
+                resolve: routeUserChecks.publisherRoles
+            })
             .when('/articles/:id', {
                 templateUrl: '/partials/article/article-detail',
                 controller: 'ArticleDetailController'
-            })
-            .when('/articles/create', {
-                templateUrl: '/partials/article/create',
-                controller: 'ArticleCreateController'
             })
             .when('/profile', {
                 templateUrl: '/partials/account/profile',

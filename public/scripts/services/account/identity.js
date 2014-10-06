@@ -11,6 +11,20 @@ meanBlog.factory('identity', function($window, UsersResource) {
         },
         isAuthorizedForRole: function(role) {
             return !!this.currentUser && this.currentUser.roles.indexOf(role) > -1;
+        },
+        isAuthorizedForAnyOfTheFollowingRoles: function (roles){
+            if (!(roles instanceof Array)){
+                throw new Error('The method expects ana array');
+            }
+
+            var authorized = false;
+            roles.forEach(function (role) {
+                if (this.currentUser && this.currentUser.roles.indexOf(role) > -1) {
+                    authorized = true;
+                }
+            });
+
+            return authorized;
         }
     }
 });

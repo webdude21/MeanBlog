@@ -2,3 +2,6 @@ body {
   margin-top: 80px;
   padding: 0;
 }
+body img {
+  max-width: 100%;
+}
