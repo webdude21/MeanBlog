@@ -5,9 +5,9 @@ meanBlog.factory('ArticleResource', function ArticleResource($resource) {
             method: 'GET',
             params: {id: '@id'}
         },
-        getAllArticles: {
-            method: 'GET',
-            isArray: true
+        update:{
+            method: 'PUT',
+            params: {id: '@id'}
         }
     });
 });
