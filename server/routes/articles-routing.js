@@ -5,5 +5,10 @@ var auth = require('../config/auth');
 module.exports = function (articlesRoute, app) {
     app.route(articlesRoute)
         .get(controllers.articles.all)
-        .post(auth.isInRole(AUTHORIZED_PUBLISHER_ROLES), controllers.articles.createNew)
+        .post(auth.isAuthenticated, auth.isInRole(AUTHORIZED_PUBLISHER_ROLES), controllers.articles.createNew);
+
+    app.route(articlesRoute + ':articleId')
+        .get(controllers.articles.article)
+        .put(auth.isAuthenticated, auth.isInRole(AUTHORIZED_PUBLISHER_ROLES), controllers.articles.update)
+        .delete(auth.isAuthenticated, auth.isInRole(AUTHORIZED_PUBLISHER_ROLES), controllers.articles.destroy);
 };
