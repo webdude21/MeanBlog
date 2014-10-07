@@ -2,13 +2,16 @@
     //h1 {{ sort }}
     //h1 {{ pager }}
     //h1 {{ columns }}
+    ul.pagination
+        li(ng-repeat="page in pages" ng-class="page.class" ng-click="pagerClick(page)")
+            a {{ page.number }}
     table.table
         thead
-            td(ng-repeat="column in columns" ng-class="getHeaderCssClass(column.class)" ng-click="headerClick(column)") {{ column.label }}
+            td.col-md-4(ng-repeat="column in columns" ng-class="getHeaderCssClass(column.class)" ng-click="headerClick(column)") {{ column.label }}
         tr(ng-repeat="user in users")
-            td
-                a(href="#/admin/users/edit/{{user.username}}")  {{ user.firstName }}
-            td
-                a(href="#/admin/users/edit/{{user.username}}") {{ user.lastName }}
-            td
-                a(href="#/admin/users/edit/{{user.username}}") {{ user.username }}
+            td.col-md-4(ng-repeat="column in columns")
+                a(href="#/admin/users/edit/{{user.username}}")  {{ user[column.name] }}
+            //td
+            //    a(href="#/admin/users/edit/{{user.username}}") {{ user.lastName }}
+            //td
+            //    a(href="#/admin/users/edit/{{user.username}}") {{ user.username }}
