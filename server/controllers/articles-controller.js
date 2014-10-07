@@ -102,10 +102,11 @@ module.exports = {
         var queryWithCategory = Article.find()
             .where('category').equals(category);
 
-        if (category && category == 'any') {
-            articleQuery(queryWithoutCategory, category, orderType, by, page, res);
-        } else {
+        if (category) {
             articleQuery(queryWithCategory, category, orderType, by, page, res);
+
+        } else {
+            articleQuery(queryWithoutCategory, category, orderType, by, page, res);
         }
     }
 };
