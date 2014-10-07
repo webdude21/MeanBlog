@@ -89,7 +89,7 @@ module.exports = {
         res.json(req.article);
     },
     all: function (req, res) {
-        var page = req.query['page'] & 1;
+        var page = parseInt(req.query['page']) || 1;
         var by = req.query['orderBy'] || 'created';
         var orderType = req.query['orderType'] == 'true' ? '-' : '';
         var category = req.query['category'] || null;
