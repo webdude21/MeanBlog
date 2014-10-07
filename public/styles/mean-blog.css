@@ -9,3 +9,26 @@ body .article-tag {
   margin-right: 5px;
   margin-top: 15px;
 }
+body .animate-repeat {
+  line-height: 40px;
+  list-style: none;
+  box-sizing: border-box;
+}
+body .animate-repeat.ng-move,
+body .animate-repeat.ng-enter,
+body .animate-repeat.ng-leave {
+  -webkit-transition: all linear 0.5s;
+  transition: all linear 0.5s;
+}
+body .animate-repeat.ng-leave.ng-leave-active,
+body .animate-repeat.ng-move,
+body .animate-repeat.ng-enter {
+  opacity: 0;
+  max-height: 0;
+}
+body .animate-repeat.ng-leave,
+body .animate-repeat.ng-move.ng-move-active,
+body .animate-repeat.ng-enter.ng-enter-active {
+  opacity: 1;
+  max-height: 40px;
+}

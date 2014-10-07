@@ -19,4 +19,4 @@
             p.text-center Search:
             input.form(ng-model="search")
     hr
-    article-view(ng-repeat="article in articles | filter: search | filter: selectedCategory | orderBy: order : orderType")
+    article-view.animate-repeat(ng-repeat="article in articles | filter: search | filter: selectedCategory | orderBy: order : orderType")
