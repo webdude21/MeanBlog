@@ -5,6 +5,7 @@ meanBlog.controller('ArticleEditController',
         $scope.categories = CategoryResource.getAllCategories();
         $scope.article = ArticleResource.getById({id: $routeParams.id}, function(){
             $scope.article.tags = $scope.article.meta.tags.join(' ');
+            $scope.article.category = $scope.article.category.id;
         });
 
         function extractTags(article) {

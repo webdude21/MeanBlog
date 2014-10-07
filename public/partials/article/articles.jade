@@ -5,13 +5,13 @@
             select.form-control(ng-model="order")
                 option(value="title") Title
                 option(value="author.username") Author
-                option(value="category.title") Category
-                option(value="date") Date
+                option(value="category.title") Category Name
+                option(value="date") Published date
         div.col-md-3
             p.text-center Order by:
             select.form-control(ng-model="orderType")
-                option(value="true" selected="selected") Ascending
-                option(value="false") Descending
+                option(value="false") Ascending
+                option(value="true") Descending
         div.col-md-3
             p.text-center Filter by category:
             select(categories id="category" class="form-control" ng-model="selectedCategory" select="{{category.id}}")
