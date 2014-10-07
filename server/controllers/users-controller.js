@@ -1,6 +1,7 @@
 var encryption = require('../utilities/encryption');
 var User = require('mongoose').model('User');
 var USER_ALREADY_EXISTS = 'User with the same name already exists';
+var viewModels = require('../view-models');
 
 module.exports = {
     createUser: function (req, res, next) {

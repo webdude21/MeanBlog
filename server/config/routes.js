@@ -3,7 +3,7 @@ var ARTICLES_ROUTE = '/api/articles/';
 var PARTIALS_PATH = '../../public/partials/';
 var CATEGORIES_ROUTE = '/api/categories/';
 var API_NOT_FOUND_ROUTE = '/api/*';
-var USERS_ROUTES = {main: '/api/users', login: '/login', logout: '/logout', edit: '/admin/editUser/:username'};
+var USERS_ROUTES = {main: '/api/users', login: '/login', logout: '/logout', edit: '/admin/user-edit/:username'};
 
 module.exports = function (app) {
     routes.usersRouting(USERS_ROUTES, app);
