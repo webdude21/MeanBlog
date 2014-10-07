@@ -1,2 +1,22 @@
 .container
-    article-view(ng-repeat="article in articles")
+    div.row
+        div.col-md-3
+            p.text-center Sort by:
+            select.form-control(ng-model="sort")
+                option(value="title" selected="selected") Title
+                option(value="author.username") Author
+                option(value="category.title") Category
+                option(value="date") Title
+        div.col-md-3
+            p.text-center Order by:
+            select.form-control(ng-model="orderType")
+                option(value="asc" selected="selected") Ascending
+                option(value="desc") Descending
+        div.col-md-3
+            p.text-center Filter by category:
+            select(categories id="category" class="form-control" ng-model="selectedCategory" select="{{category.id}}")
+        div.col-md-2.pull-right
+            p.text-center Search:
+            input.form(ng-model="search")
+    hr
+    article-view(ng-repeat="article in articles | orderBy: sort | filter: search | filter: selectedCategory")

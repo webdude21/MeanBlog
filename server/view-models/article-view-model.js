@@ -11,17 +11,26 @@ function ArticleViewModel(article) {
         id: article.author._id
     };
 
-    if (article.category){
+    if (article.category) {
         this.category = {
             title: article.category.title,
             id: article.category._id
         };
     }
+
     this.body = article.body;
     this.hidden = article.hidden;
     this.comments = article.comments;
     this.date = article.date;
     this.meta = article.meta;
+    this.updates = [];
+    var that = this;
+    article.updates.forEach(function (update) {
+        that.updates.push({
+            by: { username: update.by.username, id: update.by._id },
+            date: update.date
+        })
+    });
 
     return this;
 }
