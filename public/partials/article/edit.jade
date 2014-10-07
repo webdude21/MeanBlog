@@ -20,5 +20,5 @@
                     .col-md-10
                         input.form-control(type="text", placeholder="Type your tags here", ng-model="article.tags", required="required")
                 .pull-right
-                    button.btn.btn-primary(ng-click="update(article)", ng-disabled="createArticleForm.$invalid") Update
+                    button.btn.btn-primary(ng-click="update(article)", ng-disabled="editForm.$invalid") Update
                     a.btn.btn-primary(href="#/") Cancel

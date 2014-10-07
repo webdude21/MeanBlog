@@ -1,7 +1,8 @@
 'use strict';
-meanBlog.controller('ArticleCreateController', function ArticleCreateController($scope, ArticleResource, CategoryResource) {
+meanBlog.controller('ArticleCreateController', function ArticleCreateController($scope, notifier, ArticleResource, CategoryResource) {
     $scope.categories = CategoryResource.getAllCategories();
     $scope.article = {};
+    var ARTICLE_CREATE_SUCCESS = 'Article created successfully!';
 
     function extractTags(article) {
         var saveTags = [];
@@ -20,7 +21,14 @@ meanBlog.controller('ArticleCreateController', function ArticleCreateController(
         article.meta = {
             tags: extractTags(article)
         };
-        ArticleResource.save(article);
-        $scope.article = {};
+        ArticleResource.save(article, function(response){
+            if (response.$resolved){
+                notifier.success(ARTICLE_CREATE_SUCCESS);
+                $scope.article = {};
+            }else{
+                notifier.error("The article cannot be created!")
+            }
+        });
+
     };
 });
