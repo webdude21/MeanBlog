@@ -2,6 +2,7 @@
 var mongoose = require('mongoose');
 var viewModels = require('../view-models');
 var Article = mongoose.model('Article');
+var PAGE_SIZE = 10;
 var _ = require('lodash');
 
 module.exports = {
@@ -31,7 +32,7 @@ module.exports = {
     },
     update: function (req, res) {
         var updatedArticle = req.body;
-        Article.findById(updatedArticle.id).exec(function(err, article){
+        Article.findById(updatedArticle.id).exec(function (err, article) {
             if (err) {
                 return res.status(400).json({reason: 'Cannot find an article with such id'});
             }
@@ -70,16 +71,29 @@ module.exports = {
         res.json(req.article);
     },
     all: function (req, res) {
-        Article.find().sort('-created').populate('author category').exec(function (err, articles) {
-            if (err) {
-                return res.status(400).json({reason: 'Cannot list the articles'});
-            }
+        var page = req.query['page'] & 1;
+        var by = req.query['orderBy'] || 'created';
+        var orderType = req.query['orderType'] == 'true' ? '-' : '';
 
-            var resultArticles = [];
-            articles.forEach(function (article) {
-                resultArticles.push(viewModels.ArticleViewModel.getArticleViewModelFromArticle(article))
+        if (page < 1) {
+            page = 1;
+        }
+
+        Article.find()
+            .populate('author category')
+            .sort(orderType + by)
+            .skip((page - 1) * PAGE_SIZE)
+            .limit(PAGE_SIZE)
+            .exec(function (err, articles) {
+                if (err) {
+                    return res.status(400).json({reason: 'Cannot list the articles'});
+                }
+
+                var resultArticles = [];
+                articles.forEach(function (article) {
+                    resultArticles.push(viewModels.ArticleViewModel.getArticleViewModelFromArticle(article))
+                });
+                res.json(resultArticles);
             });
-            res.json(resultArticles);
-        });
     }
 };
