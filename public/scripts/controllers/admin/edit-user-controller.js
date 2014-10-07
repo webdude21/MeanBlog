@@ -11,7 +11,7 @@ meanBlog.controller('EditUserController', function ($scope, identity, EditUserRe
             user.roles.push("editor");
         }
         if (user.isAuthor) {
-            user.roles.push("publisher");
+            user.roles.push("author");
         }
         if (user.isUser) {
             user.roles.push("user");

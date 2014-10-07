@@ -1,5 +1,6 @@
 .container
     table.table
         tr(ng-repeat="user in users")
-            td {{ user.firstName }}
-            td {{ user.lastName }}
+            td
+                a(href="#/admin/edituser/{{user.username}}")
+                    | {{ user.firstName }} {{ user.lastName }}
