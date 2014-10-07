@@ -3,7 +3,7 @@
 var meanBlog = angular
     .module('meanBlog', ['ngResource', 'ngRoute', 'ngCookies', 'textAngular'])
     .config(function ($routeProvider) {
-        var AUTHORIZED_PUBLISHER_ROLES = ['admin', 'editor', 'contributor'];
+        var AUTHORIZED_PUBLISHER_ROLES = ['admin', 'editor', 'author'];
         var routeUserChecks = {
             publisherRoles: {
                 authenticate: function (auth) {

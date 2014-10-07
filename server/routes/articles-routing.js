@@ -1,5 +1,5 @@
 var controllers = require('../controllers');
-var AUTHORIZED_PUBLISHER_ROLES = ['admin','editor','contributor'];
+var AUTHORIZED_PUBLISHER_ROLES = ['admin', 'editor', 'author'];
 var auth = require('../config/auth');
 
 module.exports = function (articlesRoute, app) {

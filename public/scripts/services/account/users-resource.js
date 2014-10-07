@@ -1,5 +1,5 @@
 meanBlog.factory('UsersResource', function($resource) {
-    var AUTHORIZED_PUBLISHER_ROLES = ['admin', 'editor', 'contributor'];
+    var AUTHORIZED_PUBLISHER_ROLES = ['admin', 'editor', 'author'];
     var UsersResource = $resource('/api/users/:id', {_id:'@id'}, { update: {method: 'PUT', isArray: false}});
 
     UsersResource.prototype.isAdmin = function() {
