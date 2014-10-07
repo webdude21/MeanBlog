@@ -52,8 +52,10 @@ module.exports.seedInitialArticles = function () {
             }
 
             if (collection.length === 0) {
-                Article.create({ title: sampleData.title, author: user, hidden: false, body: sampleData.body,
-                    mata: {tags: sampleData.tags} });
+                for (var i = 0; i < sampleData.length; i++) {
+                    Article.create({ title: sampleData[i].title, author: user, hidden: false, body: sampleData[i].body,
+                        mata: {tags: sampleData[i].tags} });
+                }
                 console.log('Articles added to the database');
             }
         });
