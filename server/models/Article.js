@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var sampleData = require('./sample-data');
+var sampleData = require('./article-sample-data');
 var User = mongoose.model('User');
 
 
@@ -54,7 +54,7 @@ module.exports.seedInitialArticles = function () {
             if (collection.length === 0) {
                 for (var i = 0; i < sampleData.length; i++) {
                     Article.create({ title: sampleData[i].title, author: user, hidden: false, body: sampleData[i].body,
-                        mata: {tags: sampleData[i].tags} });
+                        meta: {votes: 0, tags: sampleData[i].tags}});
                 }
                 console.log('Articles added to the database');
             }
