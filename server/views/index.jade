@@ -13,8 +13,7 @@ block main-content
                 ul.nav.navbar-nav
                     li
                         a(href="#/") Home
-                    li
-                        a(href="#/categories") Categories
+                    li.dropdown(ng-controller="CategoryMenuController" ng-include="'partials/category/menu'" )
                     li.dropdown(ng-controller="ArticleMenuController" ng-include="'partials/article/menu'" )
                 div(ng-include="'partials/account/login'")
     div(ng-view class="slide-down")

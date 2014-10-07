@@ -18,5 +18,17 @@ module.exports = {
             });
             res.json(resultCategories);
         });
+    },
+    getCategoryById: function () {
+
+    },
+    createNew: function (req, res) {
+
+    },
+    update: function (req, res) {
+
+    },
+    destroy: function (req, res) {
+
     }
 };

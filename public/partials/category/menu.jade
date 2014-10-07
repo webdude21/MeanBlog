@@ -1,0 +1,8 @@
+a.dropdown-toggle(href="", data-toggle="dropdown")
+    | Categories
+    span.caret
+ul.dropdown-menu
+    li
+        a(href="#/categories/all") List categories
+    li
+        a(ng-show="identity.currentUser.isPublisher()" href="#/categories/create") Create category
