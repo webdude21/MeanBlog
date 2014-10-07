@@ -3,6 +3,7 @@ var User = require('mongoose').model('User');
 var USER_ALREADY_EXISTS = 'User with the same name already exists';
 var viewModels = require('../view-models');
 var config = require('../config/config');
+var PAGE_SIZE = 10;
 
 module.exports = {
     createUser: function (req, res, next) {
@@ -50,12 +51,34 @@ module.exports = {
         }
     },
     getAllUsers: function (req, res) {
-        User.find({}).exec(function (err, collection) {
+        var gridRequest = req.body;
+        if(gridRequest.pager == undefined) {
+            gridRequest = getDefaultGridRequestObject();
+        };
+        var sortObject = {};
+        sortObject[gridRequest.sort.columnName] = gridRequest.sort.order;
+        var currentPage = gridRequest.pager.currentPage;
+        if (currentPage < 1) {
+            currentPage = 1;
+        }
+        User.find({})
+            .sort(sortObject)
+            .skip((currentPage - 1) * PAGE_SIZE)
+            .limit(PAGE_SIZE)
+            .exec(function (err, users) {
             if (err) {
                 console.log('Users could not be loaded: ' + err);
-            }
+            };
 
-            res.send(collection);
+            User.count({}, function(err, totalUsersCount){
+                var viewModel = [];
+                users.forEach(function (user) {
+                    viewModel.push(viewModels.UserListViewModel.getUserListViewModel(user))
+                });
+                gridRequest.pager.totalPages = calculateTotalPages(totalUsersCount);
+                gridRequest.data = viewModel || [];
+                res.json(gridRequest);
+            })
         })
     },
     editUser: function (req, res) {
@@ -109,3 +132,37 @@ module.exports = {
         });
     }
 };
+
+function getDefaultGridRequestObject(){
+    var gridRequest = {
+        pager: {
+            currentPage: 1
+        },
+        sort:{
+            columnName: "username",
+            order: "desc"
+        }
+    };
+
+    return gridRequest;
+}
+
+function calculateTotalPages(totalUsersCount){
+    var totalPages = (totalUsersCount + PAGE_SIZE -1) / PAGE_SIZE;
+    totalPages = Math.floor((totalPages));
+
+    return totalPages;
+}
+
+var gridResult = {
+    pager: {
+        currentPage: 1,
+        totalPages: 10
+    },
+    sort:{
+        columnName: "username",
+        order: "desc"
+    },
+    data: []
+}
+

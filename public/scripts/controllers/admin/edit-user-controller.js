@@ -23,7 +23,7 @@ meanBlog.controller('EditUserController', function ($scope, identity, EditUserRe
                 notifier.success('User roles updated!');
             }, function (response) {
                 $location.path('/admin/users');
-                notifier.success('User roles NOT updated!' + response);
+                notifier.error('User roles NOT updated!' + response);
             });
     }
 });

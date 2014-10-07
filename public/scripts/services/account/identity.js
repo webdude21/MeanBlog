@@ -1,4 +1,4 @@
-meanBlog.factory('identity', function($window, UsersResource) {
+meanBlog.factory('identity', function ($window, UsersResource) {
     var user;
     if ($window.bootstrappedUserObject) {
         user = new UsersResource();
@@ -6,14 +6,14 @@ meanBlog.factory('identity', function($window, UsersResource) {
     }
     return {
         currentUser: user,
-        isAuthenticated: function() {
+        isAuthenticated: function () {
             return !!this.currentUser;
         },
-        isAuthorizedForRole: function(role) {
+        isAuthorizedForRole: function (role) {
             return !!this.currentUser && this.currentUser.roles.indexOf(role) > -1;
         },
-        isAuthorizedForAnyOfTheFollowingRoles: function (roles){
-            if (!(roles instanceof Array)){
+        isAuthorizedForAnyOfTheFollowingRoles: function (roles) {
+            if (!(roles instanceof Array)) {
                 throw new Error('The method expects ana array');
             }
 

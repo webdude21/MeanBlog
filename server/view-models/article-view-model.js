@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var Article = mongoose.model('Article');
+var CategoryViewModel = require('./category-simple-view-model');
 var User = mongoose.model('User');
 var Category = mongoose.model('Category');
 
@@ -12,10 +13,7 @@ function ArticleViewModel(article) {
     };
 
     if (article.category) {
-        this.category = {
-            title: article.category.title,
-            id: article.category._id
-        };
+        this.category = CategoryViewModel.getCategorySimpleViewModelFromCategory(article.category);
     }
 
     this.body = article.body;
