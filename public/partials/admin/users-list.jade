@@ -1,6 +1,16 @@
 .container
     table.table
+        thead
+            td Action
+            td First name
+            td Last name
+            td Username
         tr(ng-repeat="user in users")
             td
-                a(href="#/admin/users/edit/{{user.username}}")
-                    | {{ user.firstName }} {{ user.lastName }}
+                a(href="#/admin/users/edit/{{user.username}}") Edit
+            td
+                a(href="#/admin/users/edit/{{user.username}}")  {{ user.firstName }}
+            td
+                a(href="#/admin/users/edit/{{user.username}}") {{ user.lastName }}
+            td
+                a(href="#/admin/users/edit/{{user.username}}") {{ user.username }}
