@@ -5,6 +5,24 @@ var Article = mongoose.model('Article');
 var PAGE_SIZE = 10;
 var _ = require('lodash');
 
+function articleQuery(baseQuery, category, orderType, by, page, res) {
+    baseQuery
+        .populate('author category')
+        .sort(orderType + by)
+        .skip((page - 1) * PAGE_SIZE)
+        .limit(PAGE_SIZE)
+        .exec(function (err, articles) {
+            if (err) {
+                return res.status(400).json({reason: 'Cannot list the articles'});
+            }
+
+            var resultArticles = [];
+            articles.forEach(function (article) {
+                resultArticles.push(viewModels.ArticleViewModel.getArticleViewModelFromArticle(article))
+            });
+            res.json(resultArticles);
+        });
+}
 module.exports = {
     getArticleById: function (req, res) {
         Article.findById(req.params.articleId).populate('author category').exec(function (err, article) {
@@ -74,26 +92,20 @@ module.exports = {
         var page = req.query['page'] & 1;
         var by = req.query['orderBy'] || 'created';
         var orderType = req.query['orderType'] == 'true' ? '-' : '';
+        var category = req.query['category'] || null;
 
         if (page < 1) {
             page = 1;
         }
 
-        Article.find()
-            .populate('author category')
-            .sort(orderType + by)
-            .skip((page - 1) * PAGE_SIZE)
-            .limit(PAGE_SIZE)
-            .exec(function (err, articles) {
-                if (err) {
-                    return res.status(400).json({reason: 'Cannot list the articles'});
-                }
+        var queryWithoutCategory = Article.find();
+        var queryWithCategory = Article.find()
+            .where('category').equals(category);
 
-                var resultArticles = [];
-                articles.forEach(function (article) {
-                    resultArticles.push(viewModels.ArticleViewModel.getArticleViewModelFromArticle(article))
-                });
-                res.json(resultArticles);
-            });
+        if (category && category == 'any') {
+            articleQuery(queryWithoutCategory, category, orderType, by, page, res);
+        } else {
+            articleQuery(queryWithCategory, category, orderType, by, page, res);
+        }
     }
 };
