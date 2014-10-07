@@ -55,5 +55,55 @@ module.exports = {
 
             res.send(collection);
         })
+    },
+    editUser: function (req, res) {
+        var username = req.params.username;
+        User.findOne({ username: username}).exec(function (err, user) {
+            if (err) {
+                console.log('User could not be loaded: ' + err);
+            }
+            if (user) {
+                var viewModel = viewModels.EditUserViewModel.getEditUserViewModel(user);
+                res.send(viewModel);
+            }
+            else {
+                res.status(404);
+                res.send("No such user.")
+            }
+        })
+    },
+    updateUserRoles: function (req, res) {
+        var userData = req.body;
+        User.findOne({username: userData.username}).exec(function (err, user) {
+            if (err) {
+                console.log('User could not be loaded: ' + err);
+            }
+            if (user) {
+                user.roles = [];
+                //if(v.isAdmin){
+                user.roles.push(config.identity.roles.admin);
+                //}
+                if (userData.isEditor) {
+                    user.roles.push(config.identity.roles.editor);
+                }
+                if (userData.isAuthor) {
+                    user.roles.push(config.identity.roles.author);
+                }
+                if (userData.isUser) {
+                    user.roles.push(config.identity.roles.user);
+                }
+                user.save(function (err) {
+                    if (err) {
+                        console.log('User could not be updated: ' + err);
+                        res.badRequest('Bad request');
+                    }
+                    res.send('Ok');
+                })
+            }
+            else {
+                res.status(404);
+                res.send("No such user.")
+            }
+        });
     }
 };

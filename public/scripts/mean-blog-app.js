@@ -59,6 +59,11 @@ var meanBlog = angular
                 controller: 'UserListController',
                 resolve: routeUserChecks.adminRole
             })
+            .when('/admin/users/edit/:username', {
+                templateUrl: '/partials/admin/edit-user',
+                controller: 'EditUserController',
+                resolve: routeUserChecks.adminRole
+            })
             .otherwise({redirectTo: '/'});
     })
     .value('toastr', toastr)

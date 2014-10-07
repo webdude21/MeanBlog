@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var encryption = require('../utilities/encryption');
+var config = require('../config/config');
 
 var userSchema = mongoose.Schema({
     username: { type: String, require: '{PATH} is required', unique: true },
@@ -11,15 +12,18 @@ var userSchema = mongoose.Schema({
 });
 
 userSchema.method({
-    authenticate: function(password) {
+    authenticate: function (password) {
         return encryption.generateHashedPassword(this.salt, password) === this.hashPass;
+    },
+    isInRole: function (role) {
+        return this.roles.indexOf(role) > -1;
     }
 });
 
 var User = mongoose.model('User', userSchema);
 
-module.exports.seedInitialUsers = function() {
-    User.find({}).exec(function(err, collection) {
+module.exports.seedInitialUsers = function () {
+    User.find({}).exec(function (err, collection) {
         if (err) {
             console.log('Cannot find users: ' + err);
             return;
@@ -32,7 +36,7 @@ module.exports.seedInitialUsers = function() {
             salt = encryption.generateSalt();
             hashedPwd = encryption.generateHashedPassword(salt, 'webdude');
             User.create({username: 'webdude', firstName: 'Dimo', lastName: 'Petrov', salt: salt,
-                hashPass: hashedPwd, roles: ['admin']});
+                hashPass: hashedPwd, roles: [config.identity.roles.admin]});
             console.log('Users added to database...');
         }
     });

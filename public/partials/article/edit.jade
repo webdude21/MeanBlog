@@ -10,7 +10,7 @@
                 .form-group
                     label.col-md-2.control-label(for="categories") Category
                     .col-md-10
-                        select(categories id="category" class="form-control" required="required" ng-model="article.category")
+                        select(categories id="category" class="form-control" required="required" ng-model="article.category" select="{{article.category.id  }}")
                 .form-group
                     label.col-md-2.control-label(for="body") Body
                     .col-md-10

@@ -1,0 +1,6 @@
+.container
+    table.table
+        tr(ng-repeat="user in users")
+            td
+                a(href="#/admin/edituser/{{user.username}}")
+                    | {{ user.firstName }} {{ user.lastName }}
