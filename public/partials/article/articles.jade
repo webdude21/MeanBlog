@@ -2,16 +2,16 @@
     div.row
         div.col-md-3
             p.text-center Sort by:
-            select.form-control(ng-model="sort")
-                option(value="title" selected="selected") Title
+            select.form-control(ng-model="order")
+                option(value="title") Title
                 option(value="author.username") Author
                 option(value="category.title") Category
-                option(value="date") Title
+                option(value="date") Date
         div.col-md-3
             p.text-center Order by:
             select.form-control(ng-model="orderType")
-                option(value="asc" selected="selected") Ascending
-                option(value="desc") Descending
+                option(value="true" selected="selected") Ascending
+                option(value="false") Descending
         div.col-md-3
             p.text-center Filter by category:
             select(categories id="category" class="form-control" ng-model="selectedCategory" select="{{category.id}}")
@@ -19,4 +19,4 @@
             p.text-center Search:
             input.form(ng-model="search")
     hr
-    article-view(ng-repeat="article in articles | orderBy: sort | filter: search | filter: selectedCategory")
+    article-view(ng-repeat="article in articles | filter: search | filter: selectedCategory | orderBy: order : orderType")

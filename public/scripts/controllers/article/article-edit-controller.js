@@ -7,7 +7,6 @@ meanBlog.controller('ArticleEditController',
             $scope.article.tags = $scope.article.meta.tags.join(' ');
         });
 
-
         function extractTags(article) {
             var saveTags = [];
             var allTags = article.title + ' ' + article.tags;
