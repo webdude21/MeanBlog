@@ -1,5 +1,6 @@
 'use strict';
-meanBlog.controller('ArticleCreateController', function ArticleCreateController($scope, notifier, ArticleResource, CategoryResource) {
+meanBlog.controller('ArticleCreateController',
+    function ArticleCreateController($scope, notifier, ArticleResource, CategoryResource, $location) {
     $scope.categories = CategoryResource.getAllCategories();
     $scope.article = {};
     var ARTICLE_CREATE_SUCCESS = 'Article created successfully!';
@@ -25,6 +26,7 @@ meanBlog.controller('ArticleCreateController', function ArticleCreateController(
             if (response.$resolved){
                 notifier.success(ARTICLE_CREATE_SUCCESS);
                 $scope.article = {};
+                $location.path("/articles/" + response._id);
             }else{
                 notifier.error("The article cannot be created!")
             }

@@ -1,6 +1,6 @@
 'use strict';
 meanBlog.controller('ArticleEditController',
-    function ArticleEditController($scope, identity, notifier, $routeParams, CategoryResource, ArticleResource) {
+    function ArticleEditController($scope, identity, notifier, $location, $routeParams, CategoryResource, ArticleResource) {
         var UPDATE_SUCCESS = "The article was successfully updated!";
         $scope.identity = identity;
         $scope.categories = CategoryResource.getAllCategories();
@@ -29,6 +29,7 @@ meanBlog.controller('ArticleEditController',
             ArticleResource.update(article, function(response){
                 if (response.$resolved){
                     notifier.success(UPDATE_SUCCESS);
+                    $location.path("/articles/" + response._id);
                 }else{
                     notifier.error("The article wasn't updated!")
                 }
