@@ -22,6 +22,36 @@ userSchema.method({
 
 var User = mongoose.model('User', userSchema);
 
+function userSeed(salt, hashedPwd) {
+    User.create({username: 'webdude', firstName: 'Димо', lastName: 'Петров', salt: salt,
+        hashPass: hashedPwd, roles: [config.identity.roles.admin]});
+    User.create({username: 'pirin', firstName: 'Пирин', lastName: 'Карабенчев', salt: salt,
+        hashPass: hashedPwd, roles: [config.identity.roles.admin]});
+    User.create({username: 'kizisoft', firstName: 'Иван', lastName: 'Кизирян', salt: salt,
+        hashPass: hashedPwd, roles: [config.identity.roles.admin]});
+    User.create({username: 'lnxslackware', firstName: 'Светослав', lastName: 'Иванов', salt: salt,
+        hashPass: hashedPwd, roles: [config.identity.roles.admin]});
+    User.create({username: 'pesho', firstName: 'Пешо', lastName: 'Фитнеса', salt: salt,
+        hashPass: hashedPwd, roles: [config.identity.roles.editor]});
+    User.create({username: 'gosho', firstName: 'Гошо', lastName: 'Точния', salt: salt,
+        hashPass: hashedPwd, roles: [config.identity.roles.user]});
+    User.create({username: 'sasho', firstName: 'Саши', lastName: 'Красивия', salt: salt,
+        hashPass: hashedPwd, roles: [config.identity.roles.author]});
+    User.create({username: 'kiro', firstName: 'Киро', lastName: 'Пора', salt: salt,
+        hashPass: hashedPwd, roles: [config.identity.roles.author]});
+    User.create({username: 'assy', firstName: 'Асенчо', lastName: 'Махленския', salt: salt,
+        hashPass: hashedPwd, roles: [config.identity.roles.author]});
+    User.create({username: 'mimi', firstName: 'Мими', lastName: 'Шматката', salt: salt,
+        hashPass: hashedPwd, roles: [config.identity.roles.author]});
+    User.create({username: 'lnxslackware', firstName: 'Светослав', lastName: 'Иванов', salt: salt,
+        hashPass: hashedPwd, roles: [config.identity.roles.admin]});
+    User.create({username: 'ivaylo.kenov', firstName: 'Ivaylo', lastName: 'Kenov', salt: salt,
+        hashPass: hashedPwd, roles: [config.identity.roles.user]});
+    User.create({username: 'Nikolay.IT', firstName: 'Nikolay', lastName: 'Kostov', salt: salt,
+        hashPass: hashedPwd, roles: [config.identity.roles.author]});
+    User.create({username: 'Doncho', firstName: 'Doncho', lastName: 'Minkov', salt: salt,
+        hashPass: hashedPwd, roles: [config.identity.roles.user]});
+}
 module.exports.seedInitialUsers = function () {
     User.find({}).exec(function (err, collection) {
         if (err) {
@@ -34,9 +64,8 @@ module.exports.seedInitialUsers = function () {
             var hashedPwd;
 
             salt = encryption.generateSalt();
-            hashedPwd = encryption.generateHashedPassword(salt, 'webdude');
-            User.create({username: 'webdude', firstName: 'Dimo', lastName: 'Petrov', salt: salt,
-                hashPass: hashedPwd, roles: [config.identity.roles.admin]});
+            hashedPwd = encryption.generateHashedPassword(salt, 'secret');
+            userSeed(salt, hashedPwd);
             console.log('Users added to database...');
         }
     });

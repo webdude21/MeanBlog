@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var sampleData = require('./sample-data');
+var sampleData = require('./article-sample-data');
 var User = mongoose.model('User');
 
 
