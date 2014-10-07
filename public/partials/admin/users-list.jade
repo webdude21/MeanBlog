@@ -1,13 +1,11 @@
 .container
+    //h1 {{ sort }}
+    //h1 {{ pager }}
+    //h1 {{ columns }}
     table.table
         thead
-            td Action
-            td First name
-            td Last name
-            td Username
+            td(ng-repeat="column in columns" ng-class="getHeaderCssClass(column.class)" ng-click="headerClick(column)") {{ column.label }}
         tr(ng-repeat="user in users")
-            td
-                a(href="#/admin/users/edit/{{user.username}}") Edit
             td
                 a(href="#/admin/users/edit/{{user.username}}")  {{ user.firstName }}
             td

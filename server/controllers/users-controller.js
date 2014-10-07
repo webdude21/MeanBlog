@@ -52,15 +52,15 @@ module.exports = {
     },
     getAllUsers: function (req, res) {
         var gridRequest = req.body;
-
+        if(gridRequest.pager == undefined) {
+            gridRequest = getDefaultGridRequestObject();
+        };
         var sortObject = {};
         sortObject[gridRequest.sort.columnName] = gridRequest.sort.order;
         var currentPage = gridRequest.pager.currentPage;
         if (currentPage < 1) {
             currentPage = 1;
         }
-        console.log(sortObject);
-        console.log(currentPage);
         User.find({})
             .sort(sortObject)
             .skip((currentPage - 1) * PAGE_SIZE)
@@ -70,15 +70,15 @@ module.exports = {
                 console.log('Users could not be loaded: ' + err);
             };
 
-            var viewModel = [];
-            users.forEach(function (user) {
-                viewModel.push(viewModels.UserListViewModel.getUserListViewModel(user))
-            });
-            gridRequest.pager.totalPages = 10;
-            gridRequest.data = viewModel || [];
-            res.json(gridRequest);
-
-            //res.send(collection);
+            User.count({}, function(err, totalUsersCount){
+                var viewModel = [];
+                users.forEach(function (user) {
+                    viewModel.push(viewModels.UserListViewModel.getUserListViewModel(user))
+                });
+                gridRequest.pager.totalPages = calculateTotalPages(totalUsersCount);
+                gridRequest.data = viewModel || [];
+                res.json(gridRequest);
+            })
         })
     },
     editUser: function (req, res) {
@@ -133,6 +133,27 @@ module.exports = {
     }
 };
 
+function getDefaultGridRequestObject(){
+    var gridRequest = {
+        pager: {
+            currentPage: 1
+        },
+        sort:{
+            columnName: "username",
+            order: "desc"
+        }
+    };
+
+    return gridRequest;
+}
+
+function calculateTotalPages(totalUsersCount){
+    var totalPages = (totalUsersCount + PAGE_SIZE -1) / PAGE_SIZE;
+    totalPages = Math.floor((totalPages));
+
+    return totalPages;
+}
+
 var gridResult = {
     pager: {
         currentPage: 1,
@@ -145,12 +166,3 @@ var gridResult = {
     data: []
 }
 
-var gridRequest = {
-    pager: {
-        currentPage: 3
-    },
-    sort:{
-        columnName: "username",
-        order: "desc"
-    }
-}
