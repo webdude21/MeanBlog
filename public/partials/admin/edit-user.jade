@@ -1,31 +1,35 @@
 .container
     .well
         div
-            h5
+            h4
                 | Username: {{ user.username }}
-            h6
+            h5
                 | First name: {{ user.firstName }}
-            h6
+            h5
                 | Last name: {{ user.lastName}}
         form.form-horizontal(name="editUserForm")
             fieldset
                 legend Manage user roles
                 .form-group
                     label.col-md-2.control-label(for="admin-role") Admin
-                    .col-md-10
+                    .col-md-1
                         input#admin-role.form-control(type="checkbox", ng-model="user.isAdmin")
                 .form-group
                     label.col-md-2.control-label(for="editor-role") Editor
-                    .col-md-10
+                    .col-md-1
                         input.form-control(type="checkbox", ng-model="user.isEditor")
                 .form-group
                     label.col-md-2.control-label(for="author-role") Author
-                    .col-md-10
+                    .col-md-1
                         input.form-control(type="checkbox", ng-model="user.isAuthor")
                 .form-group
                     label.col-md-2.control-label(for="user-role") User
-                    .col-md-10
+                    .col-md-1
                         input.form-control(type="checkbox", ng-model="user.isUser")
+                //.form-group
+                //    label.col-md-2.control-label(for="last-name") First Name
+                //    .col-md-10
+                //        input.form-control(type="text", placeholder="First Name", ng-model="user.firstName", required)
                 //.form-group
                 //    label.col-md-2.control-label(for="last-name") Last Name
                 //    .col-md-10
