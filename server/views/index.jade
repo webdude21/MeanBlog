@@ -17,8 +17,7 @@ block main-content
                         a(href="#/categories") Categories
                     li.dropdown(ng-controller="ArticleMenuController" ng-include="'partials/article/menu'" )
                 div(ng-include="'partials/account/login'")
-    section
-        div(ng-view)
+    div(ng-view class="slide-down")
     footer
         p.text-center
             | &copy; Team "Dirty Martini"
