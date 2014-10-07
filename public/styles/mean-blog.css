@@ -5,3 +5,7 @@ body {
 body img {
   max-width: 100%;
 }
+body .article-tag {
+  margin-right: 5px;
+  margin-top: 15px;
+}
