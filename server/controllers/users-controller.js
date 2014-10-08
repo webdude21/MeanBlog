@@ -52,9 +52,9 @@ module.exports = {
     },
     getAllUsers: function (req, res) {
         var gridRequest = req.body;
-        if(gridRequest.pager == undefined) {
+        if (gridRequest.pager == undefined) {
             gridRequest = getDefaultGridRequestObject();
-        };
+        }
         var sortObject = {};
         sortObject[gridRequest.sort.columnName] = gridRequest.sort.order;
         var currentPage = gridRequest.pager.currentPage;
@@ -66,20 +66,20 @@ module.exports = {
             .skip((currentPage - 1) * PAGE_SIZE)
             .limit(PAGE_SIZE)
             .exec(function (err, users) {
-            if (err) {
-                console.log('Users could not be loaded: ' + err);
-            };
+                if (err) {
+                    console.log('Users could not be loaded: ' + err);
+                }
 
-            User.count({}, function(err, totalUsersCount){
-                var viewModel = [];
-                users.forEach(function (user) {
-                    viewModel.push(viewModels.UserListViewModel.getUserListViewModel(user))
-                });
-                gridRequest.pager.totalPages = calculateTotalPages(totalUsersCount);
-                gridRequest.data = viewModel || [];
-                res.json(gridRequest);
+                User.count({}, function (err, totalUsersCount) {
+                    var viewModel = [];
+                    users.forEach(function (user) {
+                        viewModel.push(viewModels.UserListViewModel.getUserListViewModel(user))
+                    });
+                    gridRequest.pager.totalPages = calculateTotalPages(totalUsersCount);
+                    gridRequest.data = viewModel || [];
+                    res.json(gridRequest);
+                })
             })
-        })
     },
     editUser: function (req, res) {
         var username = req.params.username;
@@ -133,12 +133,12 @@ module.exports = {
     }
 };
 
-function getDefaultGridRequestObject(){
+function getDefaultGridRequestObject() {
     var gridRequest = {
         pager: {
             currentPage: 1
         },
-        sort:{
+        sort: {
             columnName: "username",
             order: "desc"
         }
@@ -147,8 +147,8 @@ function getDefaultGridRequestObject(){
     return gridRequest;
 }
 
-function calculateTotalPages(totalUsersCount){
-    var totalPages = (totalUsersCount + PAGE_SIZE -1) / PAGE_SIZE;
+function calculateTotalPages(totalUsersCount) {
+    var totalPages = (totalUsersCount + PAGE_SIZE - 1) / PAGE_SIZE;
     totalPages = Math.floor((totalPages));
 
     return totalPages;
@@ -159,7 +159,7 @@ var gridResult = {
         currentPage: 1,
         totalPages: 10
     },
-    sort:{
+    sort: {
         columnName: "username",
         order: "desc"
     },
