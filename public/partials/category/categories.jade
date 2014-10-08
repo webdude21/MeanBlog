@@ -1,13 +1,14 @@
 .container
-    .row.panel
-        .col-md-4
-            p Sort by:
-            select(ng-model="sort")
+    .row
+        .form-group.col-md-2
+            label.control-label(for="sort-label") Sort by:
+            select.form-control(id="sort-label" ng-model="sort")
                 option(value="title") Title
                 option(value="date") Created on
-        .col-md-4
-            p Search:
-            input(type="text" ng-model="search")
+        .form-group.col-md-2
+            label.control-label(for="search-label") Search:
+            input.form-control(type="text" id="search-label" ng-model="search")
+    hr
     table.table.jumbotron
         thead
             tr
@@ -17,9 +18,12 @@
                     label Created on
                 td.col-md-4
                     label Articles
+                td.col-md-4
         tbody
             tr(ng-repeat="category in categories | filter: search | orderBy: sort")
                 td.col-md-4 {{category.title}}
                 td.col-md-4 {{category.date | date:'medium'}}
                 td.col-md-4
                     a(href="#/articles/all?category={{category.id}}") See all articles...
+                td.col-md-4(ng-show="identity.currentUser.isPublisher()")
+                    a.label.label-danger(href="#/categories/edit/{{category.id}}") Edit

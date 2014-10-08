@@ -54,8 +54,8 @@ var meanBlog = angular
                 controller: 'CategoriesController'
             })
             .when('/categories/:id', {
-                templateUrl: '/partials/category/detail',
-                controller: 'CategoryDetailController',
+                templateUrl: '/partials/category/edit',
+                controller: 'CategoryEditController',
                 resolve: routeUserChecks.publisherRoles
             })
             .when('/profile', {
