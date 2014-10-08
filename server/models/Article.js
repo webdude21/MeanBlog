@@ -46,7 +46,7 @@ module.exports.seedInitialArticles = function () {
             return;
         }
 
-        User.findOne(function (err, user) {
+        User.findOne.exec(function (err, user) {
             if (err) {
                 console.log(err);
             }

@@ -21,4 +21,5 @@ module.exports = function (config) {
     models.User.seedInitialUsers();
     models.Article.seedInitialArticles();
     models.Category.seedInitialCategories();
+    models.Comment.seedInitialComments();
 };
