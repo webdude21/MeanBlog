@@ -13,6 +13,8 @@ function commentsQuery(baseQuery, orderType, by, page, res) {
         .exec(function (err, comments) {
             if (err) {
                 return res.status(400).json({reason: 'Cannot list the comments'});
+            } else {
+
             }
 
             var resultComments = [];
@@ -44,15 +46,17 @@ module.exports = {
             .where('article').equals(article).where('author').equals(author);
 
         if (author) {
-            commentsQuery(queryWithAuthor, orderType, by, page, res);
-            if (article){
+            if (article) {
                 commentsQuery(queryWithAuthorAndArticle, orderType, by, page, res);
+            } else {
+                commentsQuery(queryWithAuthor, orderType, by, page, res);
             }
         } else {
-            if (article){
+            if (article) {
                 commentsQuery(queryWithArticle, orderType, by, page, res);
+            } else {
+                commentsQuery(baseQuery, orderType, by, page, res);
             }
-            commentsQuery(baseQuery, orderType, by, page, res);
         }
     },
     update: function (req, res) {
@@ -101,14 +105,14 @@ module.exports = {
     getCommentById: function (req, res) {
         Comment.findById(req.params.commentId).populate('author article')
             .exec(function (err, comment) {
-            if (err) {
-                return res.status(400).json({reason: 'Cannot find an comment with such id'});
-            }
-            if (!comment) {
-                return res.status(400).json({reason: 'Cannot find an comment with such id'});
-            }
+                if (err) {
+                    return res.status(400).json({reason: 'Cannot find an comment with such id'});
+                }
+                if (!comment) {
+                    return res.status(400).json({reason: 'Cannot find an comment with such id'});
+                }
 
-            res.json(viewModels.CommentViewModel.getCommentViewModelFromComment(comment));
-        });
+                res.json(viewModels.CommentViewModel.getCommentViewModelFromComment(comment));
+            });
     }
 };

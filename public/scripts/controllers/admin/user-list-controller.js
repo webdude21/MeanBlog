@@ -1,4 +1,4 @@
-meanBlog.controller('UserListController', function($scope, $http, notifier) {
+meanBlog.controller('UserListController', function ($scope, $http, notifier) {
     function getUsersList(gridRequest) {
         $http.post("/api/userslist" /* URL */, gridRequest)
             .success(function (gridResponse) {
@@ -6,11 +6,10 @@ meanBlog.controller('UserListController', function($scope, $http, notifier) {
                 $scope.users = gridResponse.data;
                 $scope.pager = gridResponse.pager;
                 $scope.sort = gridResponse.sort;
-                console.log(gridResponse.data);
                 var pages = [];
-                for(var i = 1; i<=$scope.pager.totalPages; i++){
+                for (var i = 1; i <= $scope.pager.totalPages; i++) {
                     var page = { number: i};
-                    if(i == $scope.pager.currentPage){
+                    if (i == $scope.pager.currentPage) {
                         page.class = 'active';
                     }
 
@@ -22,7 +21,7 @@ meanBlog.controller('UserListController', function($scope, $http, notifier) {
                     if (column.name == $scope.sort.columnName) {
                         column.class = $scope.sort.order;
                     }
-                    else{
+                    else {
                         column.class = undefined;
                     }
 
@@ -32,6 +31,7 @@ meanBlog.controller('UserListController', function($scope, $http, notifier) {
             }
         );
     }
+
     // get initial data
     getUsersList({});
 
@@ -43,9 +43,9 @@ meanBlog.controller('UserListController', function($scope, $http, notifier) {
     ];
 
     // actions
-    $scope.headerClick = function(column){
+    $scope.headerClick = function (column) {
         var newClass = '';
-        switch(column.class){
+        switch (column.class) {
             case 'desc':
                 newClass = 'asc';
                 break;
@@ -55,16 +55,16 @@ meanBlog.controller('UserListController', function($scope, $http, notifier) {
                 break;
         }
 
-        $scope.columns.forEach(function(column){
+        $scope.columns.forEach(function (column) {
             column.class = undefined;
         });
 
         column.class = newClass;
         refreshData();
     };
-    $scope.getHeaderCssClass = function (sortOrder){
+    $scope.getHeaderCssClass = function (sortOrder) {
         var cssClass = '';
-        switch(sortOrder){
+        switch (sortOrder) {
             case 'desc':
                 cssClass = 'glyphicon glyphicon-arrow-down';
                 break;
@@ -75,8 +75,8 @@ meanBlog.controller('UserListController', function($scope, $http, notifier) {
 
         return cssClass;
     };
-    $scope.pagerClick = function(page){
-        $scope.pages.forEach(function(page){
+    $scope.pagerClick = function (page) {
+        $scope.pages.forEach(function (page) {
             page.class = undefined;
         });
 
@@ -84,25 +84,25 @@ meanBlog.controller('UserListController', function($scope, $http, notifier) {
         refreshData();
     };
 
-    function refreshData(){
+    function refreshData() {
         var gridRequest = {
-            pager:{
-                currentPage:1
+            pager: {
+                currentPage: 1
             },
-            sort:{
+            sort: {
                 columnName: "username",
-                "order":"asc"
+                "order": "asc"
             }
         };
-        $scope.pages.forEach(function(page){
-            if(page.class == 'active'){
+        $scope.pages.forEach(function (page) {
+            if (page.class == 'active') {
                 gridRequest.pager.currentPage = page.number;
                 return false;
             }
         });
 
-        $scope.columns.forEach(function(column){
-            if(column.class != undefined){
+        $scope.columns.forEach(function (column) {
+            if (column.class != undefined) {
                 gridRequest.sort.columnName = column.name;
                 gridRequest.sort.order = column.class;
             }
