@@ -89,11 +89,21 @@ module.exports = {
         }
         var sortObject = {};
         sortObject[gridRequest.sort.columnName] = gridRequest.sort.order;
-        var currentPage = gridRequest.pager.currentPage;
-        if (currentPage < 1) {
-            currentPage = 1;
-        }
-        User.find({})
+
+        var query = User.find({});
+        var countQuery = User.find({});
+        addFilters(gridRequest.columns, query);
+        addFilters(gridRequest.columns, countQuery);
+        countQuery.count({}, function (err, totalUsersCount) {
+            gridRequest.pager.totalPages = calculateTotalPages(totalUsersCount);
+            gridRequest.pager.currentPage = gridRequest.pager.currentPage > gridRequest.pager.totalPages ?
+                gridRequest.pager.totalPages :gridRequest.pager.currentPage;
+
+            var currentPage = gridRequest.pager.currentPage;
+            if (currentPage < 1) {
+                currentPage = 1;
+            }
+            query
             .sort(sortObject)
             .skip((currentPage - 1) * PAGE_SIZE)
             .limit(PAGE_SIZE)
@@ -101,17 +111,19 @@ module.exports = {
                 if (err) {
                     console.log('Users could not be loaded: ' + err);
                 }
-
-                User.count({}, function (err, totalUsersCount) {
+                countQuery.count({}, function (err, totalUsersCount) {
                     var viewModel = [];
-                    users.forEach(function (user) {
-                        viewModel.push(viewModels.UserListViewModel.getUserListViewModel(user))
-                    });
-                    gridRequest.pager.totalPages = calculateTotalPages(totalUsersCount);
-                    gridRequest.data = viewModel || [];
+                    if(users) {
+                        users.forEach(function (user) {
+                            viewModel.push(viewModels.UserListViewModel.getUserListViewModel(user))
+                        });
+                    }
+
+                    gridRequest.data = viewModel;
                     res.json(gridRequest);
                 })
             })
+        });
     },
     editUser: function (req, res) {
         var username = req.params.username;
@@ -182,6 +194,18 @@ function calculateTotalPages(totalUsersCount) {
     totalPages = Math.floor((totalPages));
 
     return totalPages;
+}
+
+function addFilters(columns, query){
+    if(columns) {
+        columns.forEach(function (column) {
+            if (column.filter != undefined && column.filter != '') {
+                var filterObject = {};
+                filterObject[column.name] = new RegExp('^' + column.filter);
+                query.where(filterObject);
+            }
+        });
+    }
 }
 
 var gridResult = {
