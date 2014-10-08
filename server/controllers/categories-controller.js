@@ -16,12 +16,12 @@ module.exports = {
             results.forEach(function (category) {
                 resultCategories.push(viewModels.CategorySimpleViewModel.getCategorySimpleViewModelFromCategory(category))
             });
-            response.json(200, resultCategories);
+            response.status(200).json(resultCategories);
         });
     },
 
     getCategoryById: function (request, response) {
-        // Category.find().where({_id: request.params.cat.categoryId});
+        Category.find().where({_id: request.params.cat.categoryId});
     },
 
     createNew: function (request, response) {

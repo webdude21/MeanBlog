@@ -1,11 +1,13 @@
 'use strict';
-meanBlog.controller('ArticlesController', function ArticlesController($scope, CategoryResource, identity, ArticleResource) {
+meanBlog.controller('ArticlesController', function ArticlesController($scope, $routeParams, CategoryResource, identity, ArticleResource) {
+    var categoryParams = $routeParams.category || '';
+
     $scope.identity = identity;
     $scope.request = {
         orderBy: 'title',
         orderType: 'false',
         page: 1,
-        category: ""
+        category: categoryParams
     };
     $scope.categories = CategoryResource.getAllCategories();
     $scope.query = function(queryObject){

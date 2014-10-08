@@ -1,12 +1,25 @@
 .container
-    hr
-    table.table
+    .row.panel
+        .col-md-4
+            p Sort by:
+            select(ng-model="sort")
+                option(value="title") Title
+                option(value="date") Created on
+        .col-md-4
+            p Search:
+            input(type="text" ng-model="search")
+    table.table.jumbotron
         thead
-            td.col-md-4 Title
-            td.col-md-4 Created on
-            td.col-md-4 Articles
-        tr(ng-repeat="category in categories")
-            td.col-md-4 {{category.title}}
-            td.col-md-4 {{category.date | date:'medium'}}
-            td.col-md-4
-                a(href="#/articles/all") See all articles...
+            tr
+                td.col-md-4
+                    label Title
+                td.col-md-4
+                    label Created on
+                td.col-md-4
+                    label Articles
+        tbody
+            tr(ng-repeat="category in categories | filter: search | orderBy: sort")
+                td.col-md-4 {{category.title}}
+                td.col-md-4 {{category.date | date:'medium'}}
+                td.col-md-4
+                    a(href="#/articles/all?category={{category.id}}") See all articles...
