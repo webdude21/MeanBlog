@@ -4,6 +4,7 @@ var Category = mongoose.model('Category');
 function CategorySimpleViewModel(category) {
     this.title = category.title;
     this.id = category._id;
+    this.date = category.date;
     return this;
 }
 

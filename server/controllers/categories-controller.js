@@ -4,7 +4,7 @@ var Category = mongoose.model('Category');
 var CANNOT_LIST_CATEGORIES = 'Cannot list the categories';
 
 module.exports = {
-    all: function (request, response,next) {
+    all: function (request, response, next) {
         Category.find().exec(function (error, results) {
             if (error) {
                 return response.json(500, {
@@ -12,11 +12,11 @@ module.exports = {
                 });
             }
 
-//            var resultCategories = [];
-//            results.forEach(function (category) {
-//                resultCategories.push(viewModels.CategorySimpleViewModel.getCategorySimpleViewModelFromCategory(category))
-//            });
-            response.json(200, results);
+            var resultCategories = [];
+            results.forEach(function (category) {
+                resultCategories.push(viewModels.CategorySimpleViewModel.getCategorySimpleViewModelFromCategory(category))
+            });
+            response.json(200, resultCategories);
         });
     },
 
