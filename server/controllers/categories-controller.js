@@ -19,7 +19,7 @@ module.exports = {
             res.json(resultCategories);
         });
     },
-    getCategoryById: function () {
+    getCategoryById: function (req, res) {
 
     },
     createNew: function (req, res) {
