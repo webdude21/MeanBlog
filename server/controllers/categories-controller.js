@@ -4,7 +4,7 @@ var Category = mongoose.model('Category');
 var CANNOT_LIST_CATEGORIES = 'Cannot list the categories';
 
 module.exports = {
-    all: function (request, response, next) {
+    all: function (request, response) {
         Category.find().exec(function (error, results) {
             if (error) {
                 return response.json(500, {
