@@ -3,6 +3,7 @@ function UserListViewModel(user){
     this.firstName = user.firstName;
     this.lastName = user.lastName;
     this.roles = user.roles;
+    this.registerDate = user.registerDate;
 }
 
 module.exports = {

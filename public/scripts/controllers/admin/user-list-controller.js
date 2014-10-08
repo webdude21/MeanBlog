@@ -6,6 +6,7 @@ meanBlog.controller('UserListController', function($scope, $http, notifier) {
                 $scope.users = gridResponse.data;
                 $scope.pager = gridResponse.pager;
                 $scope.sort = gridResponse.sort;
+                console.log(gridResponse.data);
                 var pages = [];
                 for(var i = 1; i<=$scope.pager.totalPages; i++){
                     var page = { number: i};
@@ -24,7 +25,7 @@ meanBlog.controller('UserListController', function($scope, $http, notifier) {
                     else{
                         column.class = undefined;
                     }
-                    ;
+
                 });
             }).error(function (serverResponse, status, headers, config) {
                 notifier.error(serverResponse);
@@ -37,7 +38,8 @@ meanBlog.controller('UserListController', function($scope, $http, notifier) {
     $scope.columns = [
         { name: "firstName", label: 'First name'},
         { name: "lastName", label: 'Last name'},
-        { name: "username", label: 'Username'}
+        { name: "username", label: 'Username'},
+        { name: "registerDate", label: 'Register date'}
     ];
 
     // actions
@@ -80,7 +82,7 @@ meanBlog.controller('UserListController', function($scope, $http, notifier) {
 
         page.class = 'active';
         refreshData();
-    }
+    };
 
     function refreshData(){
         var gridRequest = {
@@ -91,7 +93,7 @@ meanBlog.controller('UserListController', function($scope, $http, notifier) {
                 columnName: "username",
                 "order":"asc"
             }
-        }
+        };
         $scope.pages.forEach(function(page){
             if(page.class == 'active'){
                 gridRequest.pager.currentPage = page.number;
