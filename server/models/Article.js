@@ -51,23 +51,23 @@ var seedInitialArticles = function () {
                 console.log(err);
             }
 
-            Category.findOne(function(err, category){
+            Category.findOne(function (err, category) {
                 if (err) {
                     console.log(err);
                 }
 
                 if (collection.length === 0) {
-                    sampleData.forEach(function(item){
-                        var article = new Article({ title: item.title, comments: [],
+                    sampleData.forEach(function (item) {
+                        var article = Article({ title: item.title, comments: [],
                             category: category, author: user, hidden: false,
                             body: item.body, meta: {votes: 0, tags: item.tags}});
-                        article.save(function(){
-                            category.articles.push(article);
-                            category.save();
+                        article.save(function () {
+                            category.articles.push(article._doc._id);
+                            category.save(function () {
+                            });
+                            console.log('Articles added to the database');
                         });
                     });
-
-                    console.log('Articles added to the database');
                 }
             });
         });
@@ -75,5 +75,5 @@ var seedInitialArticles = function () {
 };
 
 module.exports.seedInitialArticles = function () {
-    setInterval(seedInitialArticles, 1000);
+    setTimeout(seedInitialArticles, 1200);
 };

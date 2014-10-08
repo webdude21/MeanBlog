@@ -18,8 +18,8 @@ module.exports = function (config) {
         console.log('Database error: ' + err);
     });
 
-    models.User.seedInitialUsers();
     models.Category.seedInitialCategories();
+    models.User.seedInitialUsers();
     models.Article.seedInitialArticles();
     models.Comment.seedInitialComments();
 };
