@@ -84,11 +84,6 @@ module.exports = {
     },
     getAllUsers: function (req, res) {
         var gridRequest = req.body;
-        if (gridRequest.pager == undefined) {
-            gridRequest = getDefaultGridRequestObject();
-        }
-        var sortObject = {};
-        sortObject[gridRequest.sort.columnName] = gridRequest.sort.order;
 
         var query = User.find({});
         var countQuery = User.find({});
@@ -103,6 +98,9 @@ module.exports = {
             if (currentPage < 1) {
                 currentPage = 1;
             }
+
+            var sortObject = {};
+            sortObject[gridRequest.sort.columnName] = gridRequest.sort.order;
             query
             .sort(sortObject)
             .skip((currentPage - 1) * PAGE_SIZE)
@@ -176,18 +174,6 @@ module.exports = {
         });
     }
 };
-
-function getDefaultGridRequestObject() {
-    return {
-        pager: {
-            currentPage: 1
-        },
-        sort: {
-            columnName: "username",
-            order: "desc"
-        }
-    };
-}
 
 function calculateTotalPages(totalUsersCount) {
     var totalPages = (totalUsersCount + PAGE_SIZE - 1) / PAGE_SIZE;
