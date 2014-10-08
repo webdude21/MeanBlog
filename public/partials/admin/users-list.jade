@@ -7,7 +7,7 @@
             a {{ page.number }}
     table.table
         thead
-            td.col-md-4(ng-repeat="column in columns" ng-class="getHeaderCssClass(column.class)" ng-click="headerClick(column)") {{ column.label }}
+            td.col-md-3(ng-repeat="column in columns" ng-class="getHeaderCssClass(column.class)" ng-click="headerClick(column)") {{ column.label }}
         tr(ng-repeat="user in users")
-            td.col-md-4(ng-repeat="column in columns")
+            td.col-md-3(ng-repeat="column in columns")
                 a(href="#/admin/users/edit/{{user.username}}")  {{ user[column.name] | date:'medium'}}
