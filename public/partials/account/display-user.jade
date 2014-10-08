@@ -1,0 +1,9 @@
+.container
+    .well
+        h2 User info!
+            h3 Username: {{ user.username }}
+            h3 First name: {{ user.firstName }}
+            h3 Last name: {{ user.lastName }}
+        h2 Articles
+        div(ng-repeat="article in user.articles")
+            a(href="#/articles/{{ article.id }}") {{ article.title }}

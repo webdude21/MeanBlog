@@ -1,5 +1,7 @@
 var encryption = require('../utilities/encryption');
-var User = require('mongoose').model('User');
+var mongoose = require('mongoose');
+var User = mongoose.model('User');
+var Article = mongoose.model('Article');
 var USER_ALREADY_EXISTS = 'User with the same name already exists';
 var viewModels = require('../view-models');
 var config = require('../config/config');
@@ -49,6 +51,36 @@ module.exports = {
         else {
             res.send({reason: 'You do not have permissions!'})
         }
+    },
+    getUser: function(req, res) {
+        var username = req.params.username;
+        User.findOne({ username: username}).exec(function (err, user) {
+            if (err) {
+                console.log('User could not be loaded: ' + err);
+                res.status(500);
+                res.send("Database error.")
+            }
+            if (user) {
+                var viewModel = viewModels.DisplayUserViewModel.getDisplayUserViewModel(user);
+                Article.find({author:user._id, hidden: false}).exec(function(err, articles){
+                    if (err) {
+                        console.log('Articles could not be loaded: ' + err);
+                        res.status(500);
+                        res.send("Database error.")
+                    }
+                    viewModel.articles = [];
+                    articles.forEach(function(article){
+                        viewModel.articles.push(viewModels.ListArticleViewModel.getListArticleViewModelFromArticle(article));
+                    });
+
+                    res.json(viewModel);
+                })
+            }
+            else {
+                res.status(404);
+                res.send("No such user.")
+            }
+        })
     },
     getAllUsers: function (req, res) {
         var gridRequest = req.body;

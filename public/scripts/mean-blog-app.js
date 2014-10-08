@@ -63,6 +63,10 @@ var meanBlog = angular
                 controller: 'ProfileController',
                 resolve: routeUserChecks.authenticated
             })
+            .when('/users/:username', {
+                templateUrl: '/partials/account/display-user',
+                controller: 'DisplayUserController'
+            })
             .when('/admin/users', {
                 templateUrl: '/partials/admin/users-list',
                 controller: 'UserListController',

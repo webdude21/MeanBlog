@@ -4,7 +4,13 @@ var PARTIALS_PATH = '../../public/partials/';
 var CATEGORIES_ROUTE = '/api/categories/';
 var COMMENTS_ROUTE = '/api/comments/';
 var API_NOT_FOUND_ROUTE = '/api/*';
-var USERS_ROUTES = {main: '/api/users', login: '/login', logout: '/logout', edit: '/admin/user-edit/:username'};
+var USERS_ROUTES = {
+    main: '/api/users',
+    login: '/login',
+    logout: '/logout',
+    list: '/api/userslist',
+    getUser: '/api/getuser/:username',
+    edit: '/admin/user-edit/:username'};
 
 module.exports = function (app) {
     routes.usersRouting(USERS_ROUTES, app);

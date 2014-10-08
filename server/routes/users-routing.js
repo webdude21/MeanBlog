@@ -8,11 +8,11 @@ module.exports = function (usersRoute, app) {
         .post(controllers.users.createUser)
         .put(auth.isAuthenticated, controllers.users.updateUser);
 
-    app.route('/api/userslist').post(controllers.users.getAllUsers);
+    app.route(usersRoute.list).post(controllers.users.getAllUsers);
+    app.get(usersRoute.getUser,controllers.users.getUser);
     app.post(usersRoute.login, auth.login);
     app.post(usersRoute.logout, auth.logout);
 
-    //app.get(usersRoute.edit, auth.isInRole(config.identity.roles.admin), controllers.users.editUser);
-    app.get(usersRoute.edit, controllers.users.editUser);
-    app.put(usersRoute.edit, controllers.users.updateUserRoles);
+    app.get(usersRoute.edit, auth.isInRole(config.identity.roles.admin), controllers.users.editUser);
+    app.put(usersRoute.edit, auth.isInRole(config.identity.roles.admin), controllers.users.updateUserRoles);
 };
