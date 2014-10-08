@@ -62,7 +62,7 @@ var seedInitialArticles = function () {
                             category: category, author: user, hidden: false,
                             body: item.body, meta: {votes: 0, tags: item.tags}});
                         article.save(function () {
-                            category.articles.push(article._doc._id);
+                            category.articles.push(article);
                             category.save(function () {
                             });
                             console.log('Articles added to the database');

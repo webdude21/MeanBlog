@@ -12,7 +12,7 @@ function commentsQuery(baseQuery, orderType, by, page, res) {
         .limit(PAGE_SIZE)
         .exec(function (err, comments) {
             if (err) {
-                return res.status(400).json({reason: 'Cannot list the articles'});
+                return res.status(400).json({reason: 'Cannot list the comments'});
             }
 
             var resultComments = [];
