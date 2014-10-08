@@ -1,1 +1,1 @@
-<ul class="list-group"><li ng-repeat="comment in comments" class="list-group-item">{{comment.body}}<span class="badge">by: {{comment.author.username}}</span></li></ul>
+<ul class="list-group"><li ng-repeat="comment in comments" class="list-group-item">{{comment.body}}<span class="badge">comment by: {{comment.author.username}} on {{comment.date | date:'d MMMM y,  HH:mm:ss'}}</span></li></ul>

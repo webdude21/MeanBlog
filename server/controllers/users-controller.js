@@ -134,7 +134,7 @@ module.exports = {
 };
 
 function getDefaultGridRequestObject() {
-    var gridRequest = {
+    return {
         pager: {
             currentPage: 1
         },
@@ -143,8 +143,6 @@ function getDefaultGridRequestObject() {
             order: "desc"
         }
     };
-
-    return gridRequest;
 }
 
 function calculateTotalPages(totalUsersCount) {
@@ -164,5 +162,5 @@ var gridResult = {
         order: "desc"
     },
     data: []
-}
+};
 

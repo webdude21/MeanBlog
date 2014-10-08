@@ -1,3 +1,3 @@
 ul.list-group
     li.list-group-item(ng-repeat="comment in comments") {{comment.body}}
-        span.badge by: {{comment.author.username}}
+        span.badge comment by: {{comment.author.username}} on {{comment.date | date:'d MMMM y,  HH:mm:ss'}}
