@@ -21,14 +21,10 @@ var Article = mongoose.model('Article');
 var sampleComments = ['Ибасиму и якия сйат', 'Фостата коври', 'Вокесн домнер на остата ит', 'Жики ит ли си?',
     'Само лодокорец!', 'Без расисан!', 'Джабасрипт'];
 
-module.exports.seedInitialComments = function () {
+var seedInitialComments = function () {
     Comment.find({}).exec(function (err, collection) {
         if (err) {
             console.log('Cannot find comments: ' + err);
-            return;
-        }
-
-        if (collection.lenght > 0){
             return;
         }
 
@@ -37,31 +33,30 @@ module.exports.seedInitialComments = function () {
                 console.log(err);
             }
 
-            if (users) {
-                users.forEach(function (user) {
-
-                })
-            }
-
-
-            User.find({}).exec(function (err, articles) {
+            Article.find({}).exec(function (err, articles) {
                 if (err) {
                     console.log(err);
                 }
 
-                if (articles) {
+                if (collection.length === 0) {
                     articles.forEach(function (article) {
                         users.forEach(function (user) {
-                            for (var i = 0; i < sampleComments.length; i++) {
-                                Comment.create({body: sampleComments[i], article: article, author: user })
-                            }
+                            sampleComments.forEach(function (commentBody) {
+                              var comment = new Comment({body: commentBody, article: article, author: user });
+                              comment.save(function(){
+                                  article.comments.push(comment);
+                                  article.save(function (){});
+                              });
+                            });
                         })
-                    })
+                    });
+                    console.log('Comments added to the database');
                 }
             });
-
-
-            console.log('Comments added to the database');
         });
     });
+};
+
+module.exports.seedInitialComments = function(){
+    setTimeout(seedInitialComments, 2000);
 };
