@@ -42,7 +42,7 @@ var seedInitialComments = function () {
                     articles.forEach(function (article) {
                         users.forEach(function (user) {
                             sampleComments.forEach(function (commentBody) {
-                              var comment = new Comment({body: commentBody, article: article, author: user });
+                              var comment = Comment({body: commentBody, article: article, author: user });
                               comment.save(function(){
                                   article.comments.push(comment);
                                   article.save(function (){});
@@ -58,5 +58,5 @@ var seedInitialComments = function () {
 };
 
 module.exports.seedInitialComments = function(){
-    setTimeout(seedInitialComments, 1000);
+    setTimeout(seedInitialComments, 2000);
 };

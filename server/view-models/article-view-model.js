@@ -1,7 +1,6 @@
 var mongoose = require('mongoose');
 var Article = mongoose.model('Article');
 var CategoryViewModel = require('./category-simple-view-model');
-var CommentViewModel = require('./comment-view-model');
 var User = mongoose.model('User');
 var Category = mongoose.model('Category');
 
@@ -18,7 +17,6 @@ function ArticleViewModel(article) {
         this.category = CategoryViewModel.getCategorySimpleViewModelFromCategory(article.category);
     }
 
-    this.comments = article.comments;
     this.body = article.body;
     this.hidden = article.hidden;
     this.date = article.date;

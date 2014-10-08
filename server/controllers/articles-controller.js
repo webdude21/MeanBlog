@@ -9,7 +9,6 @@ function articleQuery(baseQuery, category, orderType, by, page, res) {
 
     baseQuery
         .populate('author category comments')
-        .populate({path: 'comments.author', select: 'author'})
         .sort(orderType + by)
         .skip((page - 1) * PAGE_SIZE)
         .limit(PAGE_SIZE)
