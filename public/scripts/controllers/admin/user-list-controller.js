@@ -17,6 +17,7 @@ meanBlog.controller('UserListController', function ($scope, $http, notifier) {
                 }
 
                 $scope.pages = pages;
+                $scope.columns = gridResponse.columns;
                 $scope.columns.forEach(function (column) {
                     if (column.name == $scope.sort.columnName) {
                         column.class = $scope.sort.order;
@@ -33,14 +34,7 @@ meanBlog.controller('UserListController', function ($scope, $http, notifier) {
     }
 
     // get initial data
-    getUsersList({});
-
-    $scope.columns = [
-        { name: "firstName", label: 'First name'},
-        { name: "lastName", label: 'Last name'},
-        { name: "username", label: 'Username'},
-        { name: "registerDate", label: 'Register date'}
-    ];
+    refreshData();
 
     // actions
     $scope.headerClick = function (column) {
@@ -59,6 +53,8 @@ meanBlog.controller('UserListController', function ($scope, $http, notifier) {
             column.class = undefined;
         });
 
+        $scope.sort.order = newClass;
+        $scope.sort.columnName = column.name;
         column.class = newClass;
         refreshData();
     };
@@ -81,6 +77,11 @@ meanBlog.controller('UserListController', function ($scope, $http, notifier) {
         });
 
         page.class = 'active';
+        $scope.pager.currentPage = page.number;
+        refreshData();
+    };
+
+    $scope.refreshData = function () {
         refreshData();
     };
 
@@ -92,21 +93,37 @@ meanBlog.controller('UserListController', function ($scope, $http, notifier) {
             sort: {
                 columnName: "username",
                 "order": "asc"
-            }
+            },
+            columns: [
+                { name: "firstName", label: 'First name', filterable: true},
+                { name: "lastName", label: 'Last name', filterable: true},
+                { name: "username", label: 'Username', filterable: true},
+                { name: "registerDate", label: 'Register date', filterable: false}
+            ]
         };
-        $scope.pages.forEach(function (page) {
-            if (page.class == 'active') {
-                gridRequest.pager.currentPage = page.number;
-                return false;
-            }
-        });
+        if($scope.pager){
+            gridRequest.pager.currentPage = $scope.pager.currentPage;
+        }
+//        $scope.pages.forEach(function (page) {
+//            if (page.class == 'active') {
+//                gridRequest.pager.currentPage = page.number;
+//                return false;
+//            }
+//        });
 
-        $scope.columns.forEach(function (column) {
-            if (column.class != undefined) {
-                gridRequest.sort.columnName = column.name;
-                gridRequest.sort.order = column.class;
-            }
-        });
+        if($scope.sort){
+            gridRequest.sort = $scope.sort;
+        }
+
+        if($scope.columns){
+            gridRequest.columns = $scope.columns;
+        }
+//        $scope.columns.forEach(function (column) {
+//            if (column.class != undefined) {
+//                gridRequest.sort.columnName = column.name;
+//                gridRequest.sort.order = column.class;
+//            }
+//        });
 
         getUsersList(gridRequest);
     }

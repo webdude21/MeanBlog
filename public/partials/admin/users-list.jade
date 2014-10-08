@@ -1,13 +1,21 @@
 .container
     //h1 {{ sort }}
     //h1 {{ pager }}
-    //h1 {{ columns }}
+    h1 {{ columns }}
     ul.pagination
         li(ng-repeat="page in pages" ng-class="page.class" ng-click="pagerClick(page)")
             a {{ page.number }}
     table.table
         thead
-            td.col-md-3(ng-repeat="column in columns" ng-class="getHeaderCssClass(column.class)" ng-click="headerClick(column)") {{ column.label }}
+            td.col-md-3(ng-repeat="column in columns")
+                div(ng-class="getHeaderCssClass(column.class)" ng-click="headerClick(column)") {{ column.label }}
+                br
+                div(ng-show="column.filterable")
+                    input(type="text" ng-model="column.filter")
+                    button(class="glyphicon glyphicon-search" ng-click="refreshData()")
         tr(ng-repeat="user in users")
             td.col-md-3(ng-repeat="column in columns")
                 a(href="#/admin/users/edit/{{user.username}}")  {{ user[column.name] | date:'d MMMM y,  HH:mm:ss.sss'}}
+    h1(ng-hide="pager.totalPages")
+        td.col-md-12
+            | No data
