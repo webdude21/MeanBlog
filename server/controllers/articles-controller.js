@@ -6,8 +6,10 @@ var PAGE_SIZE = 10;
 var _ = require('lodash');
 
 function articleQuery(baseQuery, category, orderType, by, page, res) {
+
     baseQuery
-        .populate('author category')
+        .populate('author category comments')
+        .populate({path: 'comments.author', select: 'author'})
         .sort(orderType + by)
         .skip((page - 1) * PAGE_SIZE)
         .limit(PAGE_SIZE)
@@ -18,7 +20,7 @@ function articleQuery(baseQuery, category, orderType, by, page, res) {
 
             var resultArticles = [];
             articles.forEach(function (article) {
-                resultArticles.push(viewModels.ArticleViewModel.getArticleViewModelFromArticle(article))
+                resultArticles.push(viewModels.ArticleViewModel.getArticleViewModelFromArticle(article));
             });
             res.json(resultArticles);
         });

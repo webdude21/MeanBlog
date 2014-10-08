@@ -58,5 +58,5 @@ var seedInitialComments = function () {
 };
 
 module.exports.seedInitialComments = function(){
-    setTimeout(seedInitialComments, 2000);
+    setTimeout(seedInitialComments, 1000);
 };
