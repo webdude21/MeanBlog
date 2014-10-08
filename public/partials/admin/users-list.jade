@@ -10,4 +10,4 @@
             td.col-md-3(ng-repeat="column in columns" ng-class="getHeaderCssClass(column.class)" ng-click="headerClick(column)") {{ column.label }}
         tr(ng-repeat="user in users")
             td.col-md-3(ng-repeat="column in columns")
-                a(href="#/admin/users/edit/{{user.username}}")  {{ user[column.name] | date:'medium'}}
+                a(href="#/admin/users/edit/{{user.username}}")  {{ user[column.name] | date:'d MMMM y,  HH:mm:ss.sss'}}

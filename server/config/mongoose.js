@@ -19,6 +19,7 @@ module.exports = function (config) {
     });
 
     models.User.seedInitialUsers();
-    models.Article.seedInitialArticles();
     models.Category.seedInitialCategories();
+    models.Article.seedInitialArticles();
+    models.Comment.seedInitialComments();
 };
