@@ -1,2 +1,12 @@
-h1
-    | This is Category view
+.container
+    hr
+    table.table
+        thead
+            td.col-md-4 Title
+            td.col-md-4 Created on
+            td.col-md-4 Articles
+        tr(ng-repeat="category in categories")
+            td.col-md-4 {{category.title}}
+            td.col-md-4 {{category.date | date:'medium'}}
+            td.col-md-4
+                a(href="#/articles/all") See all articles...

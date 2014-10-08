@@ -55,7 +55,8 @@ var meanBlog = angular
             })
             .when('/categories/:id', {
                 templateUrl: '/partials/category/detail',
-                controller: 'CategoryDetailController'
+                controller: 'CategoryDetailController',
+                resolve: routeUserChecks.publisherRoles
             })
             .when('/profile', {
                 templateUrl: '/partials/account/profile',

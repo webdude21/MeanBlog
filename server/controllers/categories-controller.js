@@ -4,31 +4,35 @@ var Category = mongoose.model('Category');
 var CANNOT_LIST_CATEGORIES = 'Cannot list the categories';
 
 module.exports = {
-    all: function (req, res) {
-        Category.find().exec(function (err, category) {
-            if (err) {
-                return res.json(500, {
+    all: function (request, response,next) {
+        Category.find().exec(function (error, results) {
+            if (error) {
+                return response.json(500, {
                     reason: CANNOT_LIST_CATEGORIES
                 });
             }
 
-            var resultCategories = [];
-            category.forEach(function (article) {
-                resultCategories.push(viewModels.CategorySimpleViewModel.getCategorySimpleViewModelFromCategory(article))
-            });
-            res.json(resultCategories);
+//            var resultCategories = [];
+//            results.forEach(function (category) {
+//                resultCategories.push(viewModels.CategorySimpleViewModel.getCategorySimpleViewModelFromCategory(category))
+//            });
+            response.json(200, results);
         });
     },
-    getCategoryById: function (req, res) {
+
+    getCategoryById: function (request, response) {
+        // Category.find().where({_id: request.params.cat.categoryId});
+    },
+
+    createNew: function (request, response) {
 
     },
-    createNew: function (req, res) {
+
+    update: function (request, response) {
 
     },
-    update: function (req, res) {
 
-    },
-    destroy: function (req, res) {
+    destroy: function (request, response) {
 
     }
 };
