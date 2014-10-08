@@ -1,5 +1,6 @@
 module.exports = {
     users: require('./users-controller'),
     articles: require('./articles-controller'),
-    categories: require('./categories-controller')
+    categories: require('./categories-controller'),
+    comments: require('./comments-controller')
 };

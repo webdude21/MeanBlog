@@ -5,10 +5,9 @@ var Article = mongoose.model('Article');
 var PAGE_SIZE = 10;
 var _ = require('lodash');
 
-function articleQuery(baseQuery, category, orderType, by, page, res) {
-
+function articleQuery(baseQuery, orderType, by, page, res) {
     baseQuery
-        .populate('author category comments')
+        .populate('author category')
         .sort(orderType + by)
         .skip((page - 1) * PAGE_SIZE)
         .limit(PAGE_SIZE)
@@ -104,10 +103,10 @@ module.exports = {
             .where('category').equals(category);
 
         if (category) {
-            articleQuery(queryWithCategory, category, orderType, by, page, res);
+            articleQuery(queryWithCategory, orderType, by, page, res);
 
         } else {
-            articleQuery(queryWithoutCategory, category, orderType, by, page, res);
+            articleQuery(queryWithoutCategory, orderType, by, page, res);
         }
     }
 };
