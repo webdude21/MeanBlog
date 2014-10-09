@@ -6,32 +6,33 @@ meanBlog.controller('ArticleDetailController',
         $scope.article = ArticleResource.getById({id: $routeParams.id});
         $scope.previousButtonEnabled = true;
         $scope.nextButtonEnabled = true;
+        $scope.comemntsOnThisPage = 10;
 
-        var queryObject = {
-            orderBy: 'date',
-            orderType: 'true',
-            page: $scope.commentsPage,
-            article: $routeParams.id
+        var updateCurrentPageSize = function () {
+            $scope.comemntsOnThisPage = $scope.comments.length;
         };
-        $scope.comments = CommentResource.query(queryObject);
+
+        var getQueryObject = function (page) {
+            return {
+                orderBy: 'date',
+                orderType: 'true',
+                page: page,
+                article: $routeParams.id
+            }
+        };
+
+        $scope.comments = CommentResource.query(getQueryObject($scope.commentsPage));
 
         $scope.older = function () {
             $scope.commentsPage += 1;
-            $scope.comments = CommentResource.query({
-                orderBy: 'date',
-                orderType: 'true',
-                page: $scope.commentsPage,
-                article: $routeParams.id
-            });
+            $scope.comments = CommentResource.query(getQueryObject($scope.commentsPage)
+                , updateCurrentPageSize);
+
         };
 
         $scope.newer = function () {
             $scope.commentsPage -= 1;
-            $scope.comments = CommentResource.query({
-                orderBy: 'date',
-                orderType: 'true',
-                page: $scope.commentsPage,
-                article: $routeParams.id
-            });
+            $scope.comments = CommentResource.query(getQueryObject($scope.commentsPage)
+                , updateCurrentPageSize);
         }
     });
