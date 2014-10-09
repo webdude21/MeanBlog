@@ -15,7 +15,7 @@
         tbody
             tr(ng-repeat="row in data")
                 td.col-md-3(ng-repeat="column in columns")
-                    a(href="#/admin/users/edit/{{row.username}}")  {{ getProperty(row, column.name) }}
+                    a(href="#/admin/users/edit/{{row.author.username}}")  {{ getProperty(row, column.name) | date:'d MMMM y, HH:mm:ss'}}
     h1(ng-hide="pager.totalPages")
         td.col-md-12
             | No data
