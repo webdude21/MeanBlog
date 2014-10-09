@@ -1,5 +1,5 @@
 'use strict';
-meanBlog.factory('errorHandler', ['notifier', function(notifier) {
+meanBlog.factory('errorHandler', function(notifier, $location) {
     return {
         processError: function(serverError) {
             if (serverError['error_description']) {
@@ -8,6 +8,7 @@ meanBlog.factory('errorHandler', ['notifier', function(notifier) {
 
             if (serverError['reason']) {
                 notifier.error(serverError['reason']);
+                $location.path("/not-found");
             }
 
             if (serverError.modelState) {
@@ -23,4 +24,4 @@ meanBlog.factory('errorHandler', ['notifier', function(notifier) {
             }
         }
     }
-}]);
+});
