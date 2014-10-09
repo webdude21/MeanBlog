@@ -15,7 +15,16 @@
         tbody
             tr(ng-repeat="row in data")
                 td.col-md-3(ng-repeat="column in columns")
-                    a(href="#/admin/users/edit/{{row.author.username}}")  {{ getProperty(row, column.name) | date:'d MMMM y, HH:mm:ss'}}
+                    a(href="#/articles/{{row.article.id}}" ng-show="column.label == 'Article'")
+                        | {{ getProperty(row, column.name) }}
+                    a(href="#/comments/edit/{{row.id}}" ng-show="column.label == 'Text' && row.author.username == currentUser.username")
+                        | {{ getProperty(row, column.name) }}
+                    span(href="#/comments/edit/{{row.id}}" ng-show="column.label == 'Text' && row.author.username != currentUser.username")
+                        | {{ getProperty(row, column.name) }}
+                    span(ng-show="column.label == 'Date'")
+                        | {{ getProperty(row, column.name) | date:'d MMMM y, HH:mm:ss'}}
+                    a(href="#/admin/users/edit/{{row.author.username}}" ng-show="column.label == 'Author'")
+                        | {{ getProperty(row, column.name) }}
     h1(ng-hide="pager.totalPages")
         td.col-md-12
             | No data

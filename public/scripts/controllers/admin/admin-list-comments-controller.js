@@ -1,5 +1,5 @@
 'use strict';
-meanBlog.controller('AdminListCommentsController', function ($scope, $http, notifier) {
+meanBlog.controller('AdminListCommentsController', function ($scope, $http, notifier, identity) {
     function getUsersList(gridRequest) {
         $http.post("/api/gridComments" /* URL */, gridRequest)
             .success(function (gridResponse) {
@@ -33,6 +33,8 @@ meanBlog.controller('AdminListCommentsController', function ($scope, $http, noti
             }
         );
     }
+
+    $scope.currentUser = identity.currentUser;
 
     // get initial data
     refreshData();
