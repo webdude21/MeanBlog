@@ -6,6 +6,7 @@
     span.label.label-primary.pull-left Category: {{ article.category ? article.category.title : "n/a"}}
     div(ng-show="identity.currentUser")
         a.label.label-info.pull-right(href="#/comments/create/{{article.id}}") Leave a Comment
+    hr
     h2.text-center
         a(href="#/articles/{{article.id}}" ) {{article.title}}
     hr
@@ -16,3 +17,4 @@
     div.tags
         hr
         span.article-tag.label.label-success.pull-left(ng-repeat="tag in article.meta.tags") {{article.meta.tags[$index]}}
+        hr
