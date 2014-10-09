@@ -69,6 +69,10 @@ module.exports = {
                 return res.status(400).json({reason: 'Cannot find an comment with such id'});
             }
 
+            if (req.user !== comment.author) {
+                return res.status(400).json({reason: 'You are not allowed to edit this comment'});
+            }
+
             comment.body = updatedComment.body;
 
             comment.save(function (err) {
@@ -88,7 +92,7 @@ module.exports = {
                 return res.status(400).json({reason: 'Cannot find an comment with such id'});
             }
 
-            if (req.user === comment.author || req.user.roles.indexOf('admin') > -1) {
+            if (req.user !== comment.author || !(req.user.roles.indexOf('admin') > -1)) {
                 return res.status(400).json({reason: 'You are not allowed to delete this comment'});
             }
 
