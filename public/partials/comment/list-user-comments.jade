@@ -1,4 +1,5 @@
 .container
+    h2 Comments:
     table.table.table-striped.table-hover
         thead
             tr.row
@@ -18,6 +19,6 @@
                     a.article-tag.label.label-warning.pull-left(href="#/comments/edit/{{comment.id}}") Edit
     ul.pager
         li.previous(ng-hide="comemntsOnThisPage < 10")
-            a(ng-click="older()" href="") ← Older
+            a(ng-click="prev()" href="") ← Previous
         li.next(ng-hide="commentsPage <= 1")
-            a(ng-click="newer()" href="") Newer →
+            a(ng-click="next()" href="") Next →

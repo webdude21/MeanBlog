@@ -31,13 +31,13 @@ meanBlog.controller('ListCommentsController',
 
         $scope.comments = CommentResource.query(getQueryObject($scope.commentsPage));
 
-        $scope.older = function () {
+        $scope.prev = function () {
             $scope.commentsPage += 1;
             $scope.comments = CommentResource.query(getQueryObject($scope.commentsPage)
                 , updateCurrentPageSize);
         };
 
-        $scope.newer = function () {
+        $scope.next = function () {
             $scope.commentsPage -= 1;
             $scope.comments = CommentResource.query(getQueryObject($scope.commentsPage)
                 , updateCurrentPageSize);
