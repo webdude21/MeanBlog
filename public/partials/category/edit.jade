@@ -1,4 +1,11 @@
-h1
-    | This is Category details page
-h2
-    | test
+.container
+    .well
+        form.form-horizontal(name="editForm")
+            fieldset
+                legend(ng-show="edit") Edit category
+                legend(ng-hide="edit") Create category
+                .form-group
+                    label.col-md-2.control-label(for="title") Title
+                    .col-md-4
+
+                        input.form-control(type="text" placeholder="Title goes here" ng-model="category.title" required)
