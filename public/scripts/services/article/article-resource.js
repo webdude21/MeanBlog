@@ -8,6 +8,10 @@ meanBlog.factory('ArticleResource', function ArticleResource($resource) {
         update:{
             method: 'PUT',
             params: {id: '@id'}
+        },
+        deleteById:{
+            method: 'DELETE',
+            params: {id: '@id'}
         }
     });
 });

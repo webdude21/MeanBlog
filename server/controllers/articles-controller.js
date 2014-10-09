@@ -75,14 +75,20 @@ module.exports = {
         });
     },
     destroy: function (req, res) {
-        var article = req.article;
-
-        article.remove(function (err) {
+        Article.findById(req.params.articleId).exec(function (err, article) {
             if (err) {
-                return res.status(400).json({reason: 'Cannot delete the article'});
+                return res.status(400).json({reason: 'Cannot find an article with such id'});
             }
-            res.json(article);
+            if (!article) {
+                return res.status(400).json({reason: 'Cannot find an article with such id'});
+            }
 
+            article.remove(function (err) {
+                if (err) {
+                    return res.status(400).json({reason: 'Cannot delete the article'});
+                }
+                res.json(article);
+            });
         });
     },
     show: function (req, res) {
