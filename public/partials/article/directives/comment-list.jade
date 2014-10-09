@@ -1,10 +1,11 @@
 section.comments
     h4 Comments:
-    .row
-        .col-lg-12.pull-left
-            blockquote(ng-repeat="comment in comments")
-                p {{comment.body}}
-                small.pull-right comment by: {{comment.author.username}} on {{comment.date | date:'d MMMM y, HH:mm:ss'}}
+    .container
+            .row
+                .col-md-12
+                    blockquote.text-justify.comment(ng-repeat="comment in comments")
+                        p {{comment.body}}
+                        small.pull-right comment by: {{comment.author.username}} on {{comment.date | date:'d MMMM y, HH:mm:ss'}}
         ul.pager
             li.previous(ng-hide="comemntsOnThisPage < 10")
                 a(ng-click="older()" href="") ← Older

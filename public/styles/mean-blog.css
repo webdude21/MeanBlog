@@ -8,6 +8,10 @@ body img {
 body #toast-container {
   top: 10%;
 }
+body .comment {
+  word-wrap: break-word;
+  word-break: break-word;
+}
 body .article-tag {
   margin-right: 5px;
   margin-top: 5px;

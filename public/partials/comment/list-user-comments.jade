@@ -1,21 +1,18 @@
 .container
-    .row
-        table.table.table-striped.table-hover
-            thead
-                tr
-                    th.col-lg-4 Article
-                    th.col-lg-4 Text
-                    th.col-lg-4 Posted on
-            tbody
-                tr(ng-repeat="comment in comments")
-                    td.col-lg-4
-                        a(href="#/articles/{{comment.article.id}}") {{comment.article.title}}
-                    td.col-lg-4
-                        div {{comment.body}}
-                    td.col-lg-4
-                        div {{comment.date | date:'d MMMM y, HH:mm:ss'}}
-        ul.pager
-            li.previous(ng-hide="comemntsOnThisPage < 10")
-                a(ng-click="older()" href="") ← Older
-            li.next(ng-hide="commentsPage <= 1")
-                a(ng-click="newer()" href="") Newer →
+    table.table.table-striped.table-hover
+        thead
+            tr.row
+                th.col-md-2 Article
+                th.col-md-8 Text
+                th.col-md-2 Posted on
+        tbody
+            tr.row(ng-repeat="comment in comments")
+                td
+                    a(href="#/articles/{{comment.article.id}}") {{comment.article.title}}
+                td.comment.col-md-4 {{comment.body}}
+                td {{comment.date | date:'d MMMM y, HH:mm:ss'}}
+    ul.pager
+        li.previous(ng-hide="comemntsOnThisPage < 10")
+            a(ng-click="older()" href="") ← Older
+        li.next(ng-hide="commentsPage <= 1")
+            a(ng-click="newer()" href="") Newer →
