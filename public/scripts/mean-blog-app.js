@@ -1,7 +1,7 @@
 'use strict';
 
 var meanBlog = angular
-    .module('meanBlog', ['ngResource', 'ngRoute', 'ngCookies', 'textAngular', 'ngAnimate'])
+    .module('meanBlog', ['ngResource', 'ngRoute', 'ngCookies', 'textAngular', 'ngAnimate', 'ngDialog'])
     .config(function ($routeProvider) {
         var AUTHORIZED_PUBLISHER_ROLES = ['admin', 'editor', 'author'];
         var routeUserChecks = {

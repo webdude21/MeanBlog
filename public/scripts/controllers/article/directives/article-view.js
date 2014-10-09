@@ -5,16 +5,13 @@ meanBlog.directive('articleView', function () {
         templateUrl: 'partials/article/directives/article-view.html',
         replace: true,
         scope: true,
-        controller: function ($scope, $route, ArticleResource, notifier) {
-            var DELETE_SUCCESS = "The article was successfully deleted!";
+        controller: function ($scope, $route, ngDialog) {
             $scope.deleteArticle = function (articleId) {
-                ArticleResource.deleteById({id: articleId}, function (response) {
-                    if (response.$resolved) {
-                        notifier.success(DELETE_SUCCESS);
-                        $route.reload();
-                    } else {
-                        notifier.error("The article wasn't deleted!")
-                    }
+                $scope.articleId = articleId;
+                ngDialog.open({
+                    scope: $scope,
+                    template: 'partials/dialogs/delete-warning.html',
+                    controller: 'ArticleDeleteWarningController'
                 });
             };
         }
