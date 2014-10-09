@@ -34,7 +34,7 @@ module.exports = {
     createNew: function (request, response) {
         Category.create(request.body, function (error, result) {
             if (error) {
-                response.status(500).json(CANNOT_CREATE_CATEGORIES);
+                response.status(500).json({reson: CANNOT_CREATE_CATEGORIES});
             } else {
                 response.status(201).json(result);
             }
