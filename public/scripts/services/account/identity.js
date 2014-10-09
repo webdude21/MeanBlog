@@ -13,10 +13,10 @@ meanBlog.factory('identity', function ($window, UsersResource) {
             return !!this.currentUser && this.currentUser.roles.indexOf(role) > -1;
         },
         isCreator: function (userId) {
-            return this.currentUser._id === userId;
+            return this.currentUser && this.currentUser._id === userId;
         },
         isAdminOrCreator: function (userId) {
-            return this.currentUser._id === userId || this.isAuthorizedForRole('admin');
+            return this.currentUser && this.currentUser._id === userId || this.isAuthorizedForRole('admin');
         },
         isAuthorizedForAnyOfTheFollowingRoles: function (roles) {
             if (!(roles instanceof Array)) {
