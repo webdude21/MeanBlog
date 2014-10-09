@@ -82,6 +82,9 @@ var meanBlog = angular
                 controller: 'EditUserController',
                 resolve: routeUserChecks.adminRole
             })
+            .when('/unauthorized', {
+                templateUrl: '/partials/main/unauthorized'
+            })
             .otherwise({redirectTo: '/'});
     })
     .value('toastr', toastr)
@@ -91,7 +94,7 @@ var meanBlog = angular
 meanBlog.run(function ($rootScope, $location) {
     $rootScope.$on('$routeChangeError', function (ev, current, previous, rejection) {
         if (rejection === 'not authorized') {
-            $location.path('/');
+            $location.path('/unauthorized');
         }
     })
 });
