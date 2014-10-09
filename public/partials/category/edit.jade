@@ -8,9 +8,9 @@
                     label.col-md-2.control-label(for="title") Title
                     .col-md-4
                         input.form-control(type="text" placeholder="Title goes here" ng-model="category.title" required)
-                    label.col-md-2.control-label(for="date") Create on
+                    label.col-md-2.control-label(for="date" ng-show="edit") Create on
                     .col-md-4
-                        input.form-control(type="date" ng-model="date" value="{{date}}" required)
+                        input.form-control(type="date" ng-show="edit" ng-model="date" value="{{date}}" ng-required="edit")
                 .pull-right
                     button.btn.btn-primary(ng-click="saveCategory()" ng-show="edit" ng-disabled="editForm.$invalid") Update
                     button.btn.btn-primary(ng-click="saveCategory()" ng-hide="edit" ng-disabled="editForm.$invalid") Create
