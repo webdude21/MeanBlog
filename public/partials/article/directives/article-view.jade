@@ -11,7 +11,7 @@
     hr
     .article-body.text-justify(ng-bind-html="article.body")
     hr
-    span.label.label-primary.pull-right Author: {{article.author.username}}
+    a.label.label-primary.pull-right(href="#/users/{{article.author.username}}") Author: {{article.author.username}}
     span.label.label-primary.pull-left published on: {{article.date | date:'d MMMM y, HH:mm:ss'}}
     div.tags
         hr

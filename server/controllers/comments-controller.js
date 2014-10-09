@@ -26,6 +26,12 @@ function commentsQuery(baseQuery, orderType, by, page, res) {
 }
 
 module.exports = {
+    getAllComments: function (req, res) {
+
+
+
+
+    },
     all: function (req, res) {
         var page = parseInt(req.query['page']) || 1;
         var by = req.query['orderBy'] || 'date';

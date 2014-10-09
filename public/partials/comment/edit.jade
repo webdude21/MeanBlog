@@ -7,5 +7,5 @@
                     .col-md-12
                         input.form-control(type="text", placeholder="Your comment goes here", ng-model="comment.body", required="required")
                 .pull-right
-                    button.btn.btn-primary(ng-click="editComment(comment)", ng-disabled="editCommentForm.$invalid") Send
+                    button.btn.btn-primary(ng-click="editComment(comment)", ng-disabled="editCommentForm.$invalid") Update
                     a.btn.btn-primary(href="#/articles/{{article.id}}") Cancel

@@ -1,13 +1,15 @@
 section.comments
     h4 Comments:
     .container
-            .row
-                .col-md-12
-                    blockquote.text-justify.comment(ng-repeat="comment in comments")
-                        p {{comment.body}}
-                        a.article-tag.label.label-danger.pull-left(href="" ng-show="identity.isAdminOrCreator(comment.author.id)" ng-click="deleteComment(comment.id)") Delete
-                        a.article-tag.label.label-warning.pull-left(href="#/comments/edit/{{comment.id}}" ng-show="identity.isCreator(comment.author.id)") Edit
-                        small.pull-right comment by: {{comment.author.username}} on {{comment.date | date:'d MMMM y, HH:mm:ss'}}
+        .row
+            .col-md-12
+                blockquote.text-justify.comment(ng-repeat="comment in comments")
+                    p {{comment.body}}
+                    a.article-tag.label.label-danger.pull-left(href="" ng-show="identity.isAdminOrCreator(comment.author.id)" ng-click="deleteComment(comment.id)") Delete
+                    a.article-tag.label.label-warning.pull-left(href="#/comments/edit/{{comment.id}}" ng-show="identity.isCreator(comment.author.id)") Edit
+                    small.pull-right
+                        | posted on {{comment.date | date:'d MMMM y, HH:mm:ss'}} by&nbsp
+                        a(href="#/users/{{comment.author.username}}") {{comment.author.username}}
         ul.pager
             li.previous(ng-hide="comemntsOnThisPage < 10")
                 a(ng-click="older()" href="") ← Older

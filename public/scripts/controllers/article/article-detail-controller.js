@@ -3,7 +3,12 @@ meanBlog.controller('ArticleDetailController',
     function ArticleDetailController($scope, identity, ngDialog, CommentResource, $routeParams, ArticleResource) {
         $scope.identity = identity;
         $scope.commentsPage = 1;
-        $scope.article = ArticleResource.getById({id: $routeParams.id});
+        $scope.article = ArticleResource.getById({id: $routeParams.id}, function(response){
+            if (response.$reject){
+                $location.path("/not-found");
+            }
+        });
+
         $scope.previousButtonEnabled = true;
         $scope.nextButtonEnabled = true;
         $scope.comemntsOnThisPage = 10;

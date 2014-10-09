@@ -10,12 +10,18 @@ meanBlog.controller('ArticlesController', function ArticlesController($scope, $r
         category: categoryParams
     };
     $scope.categories = CategoryResource.getAllCategories();
+
     $scope.query = function(queryObject){
         if (queryObject.page <= 0){
             queryObject.page = 1;
             return;
         }
-        $scope.articles = ArticleResource.query(queryObject);
+
+        ArticleResource.query(queryObject)
+            .$promise
+            .then(function(articles){
+                $scope.articles = articles
+            });
     };
     $scope.articles = ArticleResource.query($scope.request);
 });
