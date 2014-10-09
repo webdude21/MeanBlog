@@ -10,7 +10,7 @@ meanBlog.directive('articleView', function () {
                 $scope.articleId = articleId;
                 ngDialog.open({
                     scope: $scope,
-                    template: 'partials/dialogs/delete-warning.html',
+                    template: 'partials/dialogs/delete-article-warning',
                     controller: 'ArticleDeleteWarningController'
                 });
             };

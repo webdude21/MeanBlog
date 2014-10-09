@@ -4,6 +4,10 @@ meanBlog.factory('CommentResource', function CommentResource($resource) {
         getById: {
             method: 'GET',
             params: {id: '@id'}
+        },
+        deleteById:{
+            method: 'DELETE',
+            params: {id: '@id'}
         }
     })
 });

@@ -1,12 +1,21 @@
 'use strict';
 meanBlog.controller('ArticleDetailController',
-    function ArticleDetailController($scope, identity, CommentResource, $routeParams, ArticleResource) {
+    function ArticleDetailController($scope, identity, ngDialog, CommentResource, $routeParams, ArticleResource) {
         $scope.identity = identity;
         $scope.commentsPage = 1;
         $scope.article = ArticleResource.getById({id: $routeParams.id});
         $scope.previousButtonEnabled = true;
         $scope.nextButtonEnabled = true;
         $scope.comemntsOnThisPage = 10;
+
+        $scope.deleteComment = function (commentId) {
+            $scope.commentToDeleteId = commentId;
+            ngDialog.open({
+                scope: $scope,
+                template: 'partials/dialogs/delete-comment-warning',
+                controller: 'CommentDeleteWarningController'
+            });
+        };
 
         var updateCurrentPageSize = function () {
             $scope.comemntsOnThisPage = $scope.comments.length;
