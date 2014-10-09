@@ -80,14 +80,24 @@ module.exports = {
         });
     },
     destroy: function (req, res) {
-        var comment = req.comment;
-
-        comment.remove(function (err) {
+        Comment.findById(req.params.commentId).exec(function (err, comment) {
             if (err) {
-                return res.status(400).json({reason: 'Cannot delete the comment'});
+                return res.status(400).json({reason: 'Cannot find an comment with such id'});
             }
-            res.json(comment);
+            if (!comment) {
+                return res.status(400).json({reason: 'Cannot find an comment with such id'});
+            }
 
+            if (req.user === comment.author || req.user.roles.indexOf('admin') > -1) {
+                return res.status(400).json({reason: 'You are not allowed to delete this comment'});
+            }
+
+            comment.remove(function (err) {
+                if (err) {
+                    return res.status(400).json({reason: 'Cannot delete the comment'});
+                }
+                res.json(comment);
+            });
         });
     },
     createNew: function (req, res) {
