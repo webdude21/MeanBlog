@@ -1,6 +1,6 @@
 'use strict';
 meanBlog.controller('ListCommentsController',
-    function ListCommentsController($scope, notifier, identity, $location, CommentResource) {
+    function ListCommentsController($scope, notifier, ngDialog, identity, $location, CommentResource) {
         $scope.identity = identity;
         $scope.commentsPage = 1;
         $scope.previousButtonEnabled = true;
@@ -18,6 +18,15 @@ meanBlog.controller('ListCommentsController',
                 page: page,
                 author: identity.currentUser._id
             }
+        };
+
+        $scope.deleteComment = function (commentId) {
+            $scope.commentToDeleteId = commentId;
+            ngDialog.open({
+                scope: $scope,
+                template: 'partials/dialogs/delete-comment-warning',
+                controller: 'CommentDeleteWarningController'
+            });
         };
 
         $scope.comments = CommentResource.query(getQueryObject($scope.commentsPage));
