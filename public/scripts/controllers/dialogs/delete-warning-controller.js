@@ -1,6 +1,6 @@
 'use strict';
 meanBlog.controller('ArticleDeleteWarningController',
-    function ArticleDeleteWarningController($scope, notifier, ArticleResource) {
+    function ArticleDeleteWarningController($scope, $route, notifier, ArticleResource) {
         var DELETE_SUCCESS = "The article was successfully deleted!";
 
         $scope.deleteForReal = function () {
