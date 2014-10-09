@@ -5,21 +5,17 @@ meanBlog.directive('articleView', function () {
         templateUrl: 'partials/article/directives/article-view.html',
         replace: true,
         scope: true,
-        controller: function ($scope, ArticleResource, notifier) {
-            var UPDATE_SUCCESS = "The article was successfully updated!";
+        controller: function ($scope, $route, ArticleResource, notifier) {
+            var DELETE_SUCCESS = "The article was successfully deleted!";
             $scope.deleteArticle = function (articleId) {
-                ArticleResource.deleteById({id: articleId});
-            };
-
-            $scope.toggleHidden = function (article) {
-                article.hidden = !article.hidden;
-                ArticleResource.update(article, function(response){
-                    if (response.$resolved){
-                        notifier.success(UPDATE_SUCCESS);
-                    }else{
-                        notifier.error("The article wasn't updated!")
+                ArticleResource.deleteById({id: articleId}, function (response) {
+                    if (response.$resolved) {
+                        notifier.success(DELETE_SUCCESS);
+                        $route.reload();
+                    } else {
+                        notifier.error("The article wasn't deleted!")
                     }
-                })
+                });
             };
         }
     }
