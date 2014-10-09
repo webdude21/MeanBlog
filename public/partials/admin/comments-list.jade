@@ -13,9 +13,9 @@
                         input(type="text" ng-model="column.filter")
                         button.glyphicon-search.glyphicon(ng-click="refreshData()")
         tbody
-            tr(ng-repeat="user in users")
+            tr(ng-repeat="row in data")
                 td.col-md-3(ng-repeat="column in columns")
-                    a(href="#/admin/users/edit/{{user.username}}")  {{ user[column.name] | date:'d MMMM y,  HH:mm:ss.sss'}}
+                    a(href="#/admin/users/edit/{{row.username}}")  {{ getProperty(row, column.name) }}
     h1(ng-hide="pager.totalPages")
         td.col-md-12
             | No data
