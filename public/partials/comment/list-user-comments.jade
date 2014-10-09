@@ -2,14 +2,15 @@
     table.table.table-striped.table-hover
         thead
             tr.row
-                th.col-md-2 Article
-                th.col-md-8 Text
+                th.col-md-3 Article
+                th.col-md-7 Text
                 th.col-md-2 Posted on
         tbody
             tr.row(ng-repeat="comment in comments")
                 td
                     a(href="#/articles/{{comment.article.id}}") {{comment.article.title}}
-                td.comment.col-md-4 {{comment.body}}
+                td
+                    a.comment(href="#/comments/edit/{{comment.id}}") {{comment.body}}
                 td {{comment.date | date:'d MMMM y, HH:mm:ss'}}
     ul.pager
         li.previous(ng-hide="comemntsOnThisPage < 10")
