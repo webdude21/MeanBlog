@@ -21,7 +21,13 @@ module.exports = {
     },
 
     getCategoryById: function (request, response) {
-        Category.find().where({_id: request.params.cat.categoryId});
+        Category.find({_id: request.params.categoryId}).exec(function (error, result) {
+            if (error) {
+                response.status(500).json({reason: CANNOT_LIST_CATEGORIES});
+            } else {
+                response.status(200).json(result);
+            }
+        });
     },
 
     createNew: function (request, response) {
