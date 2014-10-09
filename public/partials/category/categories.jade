@@ -9,7 +9,7 @@
             label.control-label(for="search-label") Search:
             input.form-control(type="text" id="search-label" ng-model="search")
     hr
-    table.table.jumbotron
+    table.table.table-striped.table-hover
         thead
             tr
                 td.col-md-4
@@ -21,7 +21,8 @@
                 td.col-md-4
         tbody
             tr(ng-repeat="category in categories | filter: search | orderBy: sort")
-                td.col-md-4 {{category.title}}
+                td.col-md-4
+                    a(href="#/categories/edit/{{category.id}}") {{category.title}}
                 td.col-md-4 {{category.date | date:'d MMMM y, HH:mm:ss'}}
                 td.col-md-4
                     a(href="#/articles/all?category={{category.id}}") See all articles...

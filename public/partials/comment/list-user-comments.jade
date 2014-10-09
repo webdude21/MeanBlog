@@ -8,7 +8,7 @@
                 th.col-md-2 Posted on
                 th.col-md-1 Actions
         tbody
-            tr.row(ng-repeat="comment in comments")
+            tr.row.slide-down(ng-repeat="comment in comments")
                 td
                     a(href="#/articles/{{comment.article.id}}") {{comment.article.title}}
                 td

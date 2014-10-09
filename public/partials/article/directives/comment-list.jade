@@ -3,7 +3,7 @@ section.comments
     .container
         .row
             .col-md-12
-                blockquote.text-justify.comment(ng-repeat="comment in comments")
+                blockquote.text-justify.comment.slide-down(ng-repeat="comment in comments")
                     p {{comment.body}}
                     a.article-tag.label.label-danger.pull-left(href="" ng-show="identity.isAdminOrCreator(comment.author.id)" ng-click="deleteComment(comment.id)") Delete
                     a.article-tag.label.label-warning.pull-left(href="#/comments/edit/{{comment.id}}" ng-show="identity.isCreator(comment.author.id)") Edit
