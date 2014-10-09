@@ -1,9 +1,23 @@
 var crypto = require('crypto');
 
 module.exports = {
-    populateResponse: function (req, res, DataSource, PAGE_SIZE, getViewModel) {
+    populateResponse: function (req, res, DataSource, populateString, PAGE_SIZE, getViewModel) {
         var gridRequest = req.body;
         var query = DataSource.find({});
+
+//        var tq = DataSource.find( {} ).populate({
+//            path: "article",
+//            match: { title : /^S/ }
+//        });
+//
+//        console.log(tq);
+//        tq.exec(function(err, comments){
+//            console.log(comment);
+//        })
+
+        if(populateString){
+            query.populate(populateString);
+        };
         var countQuery = DataSource.find({});
         addFilters(gridRequest.columns, query);
         addFilters(gridRequest.columns, countQuery);
@@ -57,7 +71,16 @@ function addFilters(columns, query){
         columns.forEach(function (column) {
             if (column.filter != undefined && column.filter != '') {
                 var filterObject = {};
-                filterObject[column.name] = new RegExp('^' + column.filter);
+                var regEx;
+                switch(column.method){
+                    case 'contains':
+                        regEx = new RegExp(column.filter, 'i');
+                        break;
+                    default :
+                        regEx = new RegExp('^' + column.filter, 'i');
+                        break;
+                }
+                filterObject[column.name] = regEx;
                 query.where(filterObject);
             }
         });

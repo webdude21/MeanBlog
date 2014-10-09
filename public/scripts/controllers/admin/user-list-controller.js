@@ -38,6 +38,9 @@ meanBlog.controller('UserListController', function ($scope, $http, notifier) {
 
     // actions
     $scope.headerClick = function (column) {
+        if(!column.sortable){
+            return;
+        }
         var newClass = '';
         switch (column.class) {
             case 'desc':
@@ -95,21 +98,15 @@ meanBlog.controller('UserListController', function ($scope, $http, notifier) {
                 "order": "asc"
             },
             columns: [
-                { name: "firstName", label: 'First name', filterable: true},
-                { name: "lastName", label: 'Last name', filterable: true},
-                { name: "username", label: 'Username', filterable: true},
-                { name: "registerDate", label: 'Register date', filterable: false}
+                { name: "firstName", label: 'First name', filterable: true, sortable: true, method: "contains"},
+                { name: "lastName", label: 'Last name', filterable: true, sortable: true, method: "contains"},
+                { name: "username", label: 'Username', filterable: true, sortable: true, method: "contains"},
+                { name: "registerDate", label: 'Register date', filterable: false, sortable: true, method: "contains"}
             ]
         };
         if($scope.pager){
             gridRequest.pager.currentPage = $scope.pager.currentPage;
         }
-//        $scope.pages.forEach(function (page) {
-//            if (page.class == 'active') {
-//                gridRequest.pager.currentPage = page.number;
-//                return false;
-//            }
-//        });
 
         if($scope.sort){
             gridRequest.sort = $scope.sort;
@@ -118,12 +115,6 @@ meanBlog.controller('UserListController', function ($scope, $http, notifier) {
         if($scope.columns){
             gridRequest.columns = $scope.columns;
         }
-//        $scope.columns.forEach(function (column) {
-//            if (column.class != undefined) {
-//                gridRequest.sort.columnName = column.name;
-//                gridRequest.sort.order = column.class;
-//            }
-//        });
 
         getUsersList(gridRequest);
     }

@@ -56,3 +56,8 @@ var seedInitialComments = function () {
 module.exports.seedInitialComments = function(){
     setTimeout(seedInitialComments, 2000);
 };
+//var t =
+//{"pager": {"currentPage": 1},
+//    "sort": {"columnName": "article", "order": "asc"}
+//}
+//    "columns":[{"name":"firstName","label":"First name","filterable":true},{"name":"lastName","label":"Last name","filterable":true},{"name":"username","label":"Username","filterable":true},{"name":"registerDate","label":"Register date","filterable":false}]}

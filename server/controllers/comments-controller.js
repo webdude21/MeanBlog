@@ -3,6 +3,7 @@ var mongoose = require('mongoose');
 var viewModels = require('../view-models');
 var Comment = mongoose.model('Comment');
 var PAGE_SIZE = 10;
+var MeanGridView = require("../utilities/mean-grid-view");
 
 function commentsQuery(baseQuery, orderType, by, page, res) {
     baseQuery
@@ -27,10 +28,7 @@ function commentsQuery(baseQuery, orderType, by, page, res) {
 
 module.exports = {
     getAllComments: function (req, res) {
-
-
-
-
+        MeanGridView.populateResponse(req, res, Comment, 'author article', 10, viewModels.CommentViewModel.getCommentViewModelFromComment);
     },
     all: function (req, res) {
         var page = parseInt(req.query['page']) || 1;

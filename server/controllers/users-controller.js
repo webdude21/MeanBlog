@@ -4,8 +4,6 @@ var User = mongoose.model('User');
 var Article = mongoose.model('Article');
 var USER_ALREADY_EXISTS = 'User with the same name already exists';
 var viewModels = require('../view-models');
-var config = require('../config/config');
-var PAGE_SIZE = 10;
 var MeanGridView = require("../utilities/mean-grid-view");
 
 module.exports = {
@@ -84,45 +82,7 @@ module.exports = {
         })
     },
     getAllUsers: function (req, res) {
-        MeanGridView.populateResponse(req, res, User, 10, viewModels.UserListViewModel.getUserListViewModel);
-//        var gridRequest = req.body;
-//
-//        var query = User.find({});
-//        var countQuery = User.find({});
-//        addFilters(gridRequest.columns, query);
-//        addFilters(gridRequest.columns, countQuery);
-//        countQuery.count({}, function (err, totalUsersCount) {
-//            gridRequest.pager.totalPages = calculateTotalPages(totalUsersCount);
-//            gridRequest.pager.currentPage = gridRequest.pager.currentPage > gridRequest.pager.totalPages ?
-//                gridRequest.pager.totalPages :gridRequest.pager.currentPage;
-//
-//            var currentPage = gridRequest.pager.currentPage;
-//            if (currentPage < 1) {
-//                currentPage = 1;
-//            }
-//
-//            var sortObject = {};
-//            sortObject[gridRequest.sort.columnName] = gridRequest.sort.order;
-//            query
-//            .sort(sortObject)
-//            .skip((currentPage - 1) * PAGE_SIZE)
-//            .limit(PAGE_SIZE)
-//            .exec(function (err, users) {
-//                if (err) {
-//                    console.log('Users could not be loaded: ' + err);
-//                }
-//
-//                var viewModel = [];
-//                if(users) {
-//                    users.forEach(function (user) {
-//                        viewModel.push(viewModels.UserListViewModel.getUserListViewModel(user))
-//                    });
-//                }
-//
-//                gridRequest.data = viewModel;
-//                res.json(gridRequest);
-//            })
-//        });
+        MeanGridView.populateResponse(req, res, User, null, 10, viewModels.UserListViewModel.getUserListViewModel);
     },
     editUser: function (req, res) {
         var username = req.params.username;
