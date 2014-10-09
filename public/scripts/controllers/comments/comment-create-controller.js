@@ -10,7 +10,7 @@ meanBlog.controller('CommentCreateController',
             CommentResource.save(comment, function (response) {
                 if (response.$resolved) {
                     notifier.success(COMMENT_CREATE_SUCCESS);
-                    $location.path("/articles/" + response._id);
+                    $location.path("/articles/" + $scope.article.id);
                 } else {
                     notifier.error("Your comment cannot be created!")
                 }

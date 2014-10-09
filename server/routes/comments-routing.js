@@ -5,7 +5,7 @@ var auth = require('../config/auth');
 module.exports = function (commentsRoute, app) {
     app.route(commentsRoute)
         .get(controllers.comments.all)
-        .post(auth.isAuthenticated, auth.isInRole(AUTHORIZED_PUBLISHER_ROLES), controllers.comments.createNew);
+        .post(auth.isAuthenticated, controllers.comments.createNew);
 
     app.route(commentsRoute + ':commentId')
         .get(controllers.comments.getCommentById)

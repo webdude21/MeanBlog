@@ -14,12 +14,6 @@ var articleSchema = mongoose.Schema({
         ref: 'Category'
     },
     body: String,
-    comments: [
-        {
-            type: mongoose.Schema.ObjectId,
-            ref: 'Comment'
-        }
-    ],
     date: { type: Date, default: Date.now },
     hidden: Boolean,
     meta: {
@@ -58,15 +52,10 @@ var seedInitialArticles = function () {
 
                 if (collection.length === 0) {
                     sampleData.forEach(function (item) {
-                        var article = Article({ title: item.title, comments: [],
+                        Article.create({ title: item.title, comments: [],
                             category: category, author: user, hidden: false,
                             body: item.body, meta: {votes: 0, tags: item.tags}});
-                        article.save(function () {
-                            category.articles.push(article);
-                            category.save(function () {
-                            });
-                            console.log('Articles added to the database');
-                        });
+                        console.log('Articles added to the database');
                     });
                 }
             });

@@ -2,12 +2,6 @@ var mongoose = require('mongoose');
 
 var categorySchema = mongoose.Schema({
     title: { type: String, required: true, unique: true },
-    articles: [
-        {
-            type: mongoose.Schema.ObjectId,
-            ref: 'Article'
-        }
-    ],
     hidden: Boolean,
     date: { type: Date, default: Date.now }
 });
