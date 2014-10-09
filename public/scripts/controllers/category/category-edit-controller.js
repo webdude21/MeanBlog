@@ -15,14 +15,14 @@ meanBlog.controller('CategoryEditController', function CategoryEditController($s
 
         if ($scope.edit) {
             category.id = $scope.category._id;
-            $http.put(CATEGORY_API_PATH + $scope.category._id, category).success(function (result) {
+            $http.put(CATEGORY_API_PATH + $scope.category._id, category).success(function () {
                 notifier.success(SUCCESS_UPDATING_CATEGORY);
                 $location.path('/categories/all');
             }).error(function () {
                 notifier.error(ERROR_UPDATING_CATEGORY);
             });
         } else {
-            $http.post(CATEGORY_API_PATH, category).success(function (result) {
+            $http.post(CATEGORY_API_PATH, category).success(function () {
                 notifier.success(SUCCESS_CREATED_CATEGORY);
                 $location.path('/');
             }).error(function () {
