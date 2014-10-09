@@ -42,11 +42,7 @@ var seedInitialComments = function () {
                     articles.forEach(function (article) {
                         users.forEach(function (user) {
                             sampleComments.forEach(function (commentBody) {
-                              var comment = Comment({body: commentBody, article: article, author: user });
-                              comment.save(function(){
-                                  article.comments.push(comment);
-                                  article.save(function (){});
-                              });
+                             Comment.create({body: commentBody, article: article, author: user });
                             });
                         })
                     });

@@ -1,7 +1,7 @@
 'use strict';
 
 var meanBlog = angular
-    .module('meanBlog', ['ngResource', 'ngRoute', 'ngCookies', 'textAngular', 'ngAnimate'])
+    .module('meanBlog', ['ngResource', 'ngRoute', 'ngCookies', 'textAngular', 'ngAnimate', 'ngDialog'])
     .config(function ($routeProvider) {
         var AUTHORIZED_PUBLISHER_ROLES = ['admin', 'editor', 'author'];
         var routeUserChecks = {
@@ -58,6 +58,11 @@ var meanBlog = angular
                 controller: 'CategoryEditController',
                 resolve: routeUserChecks.publisherRoles
             })
+            .when('/comments/create/:articleId',{
+                templateUrl: '/partials/comment/create',
+                controller: 'CommentCreateController',
+                resolve: routeUserChecks.authenticated
+            })
             .when('/profile', {
                 templateUrl: '/partials/account/profile',
                 controller: 'ProfileController',
@@ -77,6 +82,9 @@ var meanBlog = angular
                 controller: 'EditUserController',
                 resolve: routeUserChecks.adminRole
             })
+            .when('/unauthorized', {
+                templateUrl: '/partials/main/unauthorized'
+            })
             .otherwise({redirectTo: '/'});
     })
     .value('toastr', toastr)
@@ -86,7 +94,7 @@ var meanBlog = angular
 meanBlog.run(function ($rootScope, $location) {
     $rootScope.$on('$routeChangeError', function (ev, current, previous, rejection) {
         if (rejection === 'not authorized') {
-            $location.path('/');
+            $location.path('/unauthorized');
         }
     })
 });
