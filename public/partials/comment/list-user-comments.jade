@@ -1,0 +1,9 @@
+.comments-list
+    ul.list-group
+        li.list-group-item(ng-repeat="comment in comments") {{comment.body}}
+            span.badge comment by: {{comment.author.username}} on {{comment.date | date:'d MMMM y, HH:mm:ss'}}
+    ul.pager
+        li.previous(ng-hide="comemntsOnThisPage < 10")
+            a(ng-click="older()" href="") ← Older
+        li.next(ng-hide="commentsPage <= 1")
+            a(ng-click="newer()" href="") Newer →

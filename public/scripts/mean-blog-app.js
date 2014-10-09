@@ -82,6 +82,11 @@ var meanBlog = angular
                 controller: 'EditUserController',
                 resolve: routeUserChecks.adminRole
             })
+            .when('/profile/comments/all', {
+                templateUrl: '/partials/comment/list-user-comments',
+                controller: 'ListCommentsController',
+                resolve: routeUserChecks.authenticated
+            })
             .when('/unauthorized', {
                 templateUrl: '/partials/main/unauthorized'
             })

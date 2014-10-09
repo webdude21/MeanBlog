@@ -16,5 +16,7 @@
                     a(href="#/admin/users") Users
                 li(ng-show="identity.isAuthenticated()")
                     a(href="#/profile") Profile
+                li(ng-show="identity.isAuthenticated()")
+                    a(href="#/profile/comments/all") Comments
                 li
                     a(href="#" ng-click="logout()") Sign Out
