@@ -1,7 +1,16 @@
 .comments-list
-    ul.list-group
-        li.list-group-item(ng-repeat="comment in comments") {{comment.body}}
-            span.badge comment by: {{comment.author.username}} on {{comment.date | date:'d MMMM y, HH:mm:ss'}}
+    table.table.table-striped.table-hover
+        thead
+            tr
+                th Article
+                th Text
+                th Posted on
+        tbody
+            tr(ng-repeat="comment in comments")
+                td
+                    a(href="#/articles/{{comment.article.id}}") {{comment.article.title}}
+                td {{comment.body}}
+                td {{comment.date | date:'d MMMM y, HH:mm:ss'}}
     ul.pager
         li.previous(ng-hide="comemntsOnThisPage < 10")
             a(ng-click="older()" href="") ← Older
