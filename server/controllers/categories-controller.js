@@ -52,7 +52,7 @@ module.exports = {
                     if (error) {
                         response.status(500).json({reason: CANNOT_CREATE_CATEGORIES});
                     } else {
-                        response.status(200);
+                        response.status(200).json({});
                     }
                 });
             }

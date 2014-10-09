@@ -9,12 +9,12 @@ meanBlog.controller('CategoryEditController', function CategoryEditController($s
 
     $scope.saveCategory = function saveCategory() {
         var category = {
-            title: $scope.category.title,
-            date: new Date($scope.date)
+            title: $scope.category.title
         };
 
         if ($scope.edit) {
             category.id = $scope.category._id;
+            category.date = new Date($scope.date);
             $http.put(CATEGORY_API_PATH + $scope.category._id, category).success(function () {
                 notifier.success(SUCCESS_UPDATING_CATEGORY);
                 $location.path('/categories/all');
