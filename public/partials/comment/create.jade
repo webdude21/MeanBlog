@@ -1,0 +1,11 @@
+.container.lighter
+    .well
+        form.form-horizontal(name="createCommentForm")
+            fieldset
+                legend Laeve a comment
+                .form-group
+                    .col-md-12
+                        input.form-control(type="text", placeholder="Your comment goes here", ng-model="comment.body", required="required")
+                .pull-right
+                    button.btn.btn-primary(ng-click="createNew(comment)", ng-disabled="createCommentForm.$invalid") Send
+                    a.btn.btn-primary(href="#/") Cancel

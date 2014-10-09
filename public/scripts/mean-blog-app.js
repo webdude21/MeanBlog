@@ -58,6 +58,11 @@ var meanBlog = angular
                 controller: 'CategoryEditController',
                 resolve: routeUserChecks.publisherRoles
             })
+            .when('/comments/create/:articleId',{
+                templateUrl: '/partials/comment/create',
+                controller: 'CommentCreateController',
+                resolve: routeUserChecks.authenticated
+            })
             .when('/profile', {
                 templateUrl: '/partials/account/profile',
                 controller: 'ProfileController',
