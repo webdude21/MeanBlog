@@ -2,7 +2,10 @@
 
 var meanBlog = angular
     .module('meanBlog', ['ngResource', 'ngRoute', 'ngCookies', 'textAngular', 'ngAnimate', 'ngDialog'])
-    .config(function ($routeProvider) {
+    .config(function ($routeProvider, $httpProvider) {
+        $httpProvider.interceptors.push('errorHandlerHttpInterceptor');
+
+
         var AUTHORIZED_PUBLISHER_ROLES = ['admin', 'editor', 'author'];
         var routeUserChecks = {
             publisherRoles: {
@@ -94,6 +97,9 @@ var meanBlog = angular
             })
             .when('/unauthorized', {
                 templateUrl: '/partials/main/unauthorized'
+            })
+            .when('/not-found', {
+                templateUrl: '/partials/main/not-found'
             })
             .otherwise({redirectTo: '/'});
     })
