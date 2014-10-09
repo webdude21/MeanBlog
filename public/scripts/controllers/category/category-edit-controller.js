@@ -1,7 +1,35 @@
 'use strict';
-meanBlog.controller('CategoryEditController', function CategoryEditController($scope, $http, $routeParams, notifier) {
+meanBlog.controller('CategoryEditController', function CategoryEditController($scope, $http, $routeParams, $location, notifier) {
     var ERROR_READING_CATEGORY = 'Cannot read categories!',
+        ERROR_UPDATING_CATEGORY = 'Cannot update category!',
+        ERROR_CREATING_CATEGORY = 'Cannot create category!',
+        SUCCESS_UPDATING_CATEGORY = 'Category updated successfully!',
+        SUCCESS_CREATED_CATEGORY = 'Category created successfully!',
         CATEGORY_API_PATH = '/api/categories/';
+
+    $scope.saveCategory = function saveCategory() {
+        var category = {
+            title: $scope.category.title,
+            date: new Date($scope.date)
+        };
+
+        if ($scope.edit) {
+            category.id = $scope.category._id;
+            $http.put(CATEGORY_API_PATH + $scope.category._id, category).success(function (result) {
+                notifier.success(SUCCESS_UPDATING_CATEGORY);
+                $location.path('/categories/all');
+            }).error(function () {
+                notifier.error(ERROR_UPDATING_CATEGORY);
+            });
+        } else {
+            $http.post(CATEGORY_API_PATH, category).success(function (result) {
+                notifier.success(SUCCESS_CREATED_CATEGORY);
+                $location.path('/');
+            }).error(function () {
+                notifier.error(ERROR_CREATING_CATEGORY);
+            });
+        }
+    };
 
     if ($routeParams.id && $routeParams.id !== 'null') {
         $http.get(CATEGORY_API_PATH + $routeParams.id).success(function (result) {
@@ -20,13 +48,12 @@ function pad(number) {
     if (number < 10) {
         return '0' + number;
     }
+
     return number;
 }
 
 function dateToInputString(dateFromDB) {
     var date = new Date(dateFromDB);
 
-    return   date.getUTCFullYear() +
-        '-' + pad(date.getUTCMonth() + 1) +
-        '-' + pad(date.getUTCDate());
+    return date.getUTCFullYear() + '-' + pad(date.getUTCMonth() + 1) + '-' + pad(date.getUTCDate());
 }

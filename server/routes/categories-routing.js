@@ -9,6 +9,5 @@ module.exports = function (categoriesRoute, app) {
 
     app.route(categoriesRoute + ':categoryId')
         .get(controllers.categories.getCategoryById)
-        .put(auth.isAuthenticated, auth.isInRole(AUTHORIZED_PUBLISHER_ROLES), controllers.categories.update)
-        .delete(auth.isAuthenticated, auth.isInRole(AUTHORIZED_PUBLISHER_ROLES), controllers.categories.destroy);
+        .put(auth.isAuthenticated, auth.isInRole(AUTHORIZED_PUBLISHER_ROLES), controllers.categories.update);
 };
