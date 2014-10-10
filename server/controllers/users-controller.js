@@ -5,6 +5,7 @@ var Article = mongoose.model('Article');
 var USER_ALREADY_EXISTS = 'User with the same name already exists';
 var viewModels = require('../view-models');
 var MeanGridView = require("../utilities/mean-grid-view");
+var config = require('../config/config');
 
 module.exports = {
     createUser: function (req, res, next) {
