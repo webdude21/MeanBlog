@@ -1,6 +1,7 @@
 var config = require('../config/config');
 
 function EditUserViewModel(user) {
+    this._id = user._id;
     this.username = user.username;
     this.firstName = user.firstName;
     this.lastName = user.lastName;
