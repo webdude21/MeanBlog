@@ -1,4 +1,5 @@
 var passport = require('passport');
+var viewModels = require('../view-models');
 
 module.exports = {
     login: function (req, res, next) {
@@ -10,7 +11,7 @@ module.exports = {
 
             req.logIn(user, function (err) {
                 if (err) return next(err);
-                res.send({success: true, user: user});
+                res.send({success: true, user: viewModels.UserViewModel.getUserViewModel(user)});
             })
         });
 
