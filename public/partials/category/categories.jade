@@ -23,7 +23,7 @@
             tr(ng-repeat="category in categories | filter: search | orderBy: sort")
                 td.col-md-4
                     a(href="#/categories/edit/{{category.id}}") {{category.title}}
-                td.col-md-4 {{category.date | date:'d MMMM y, HH:mm:ss'}}
+                td.col-md-4 {{category.date | date:'d MMMM y'}}
                 td.col-md-4
                     a(href="#/articles/all?category={{category.id}}") See all articles...
                 td.col-md-4(ng-show="identity.currentUser.isPublisher()")
