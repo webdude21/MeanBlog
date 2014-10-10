@@ -27,6 +27,7 @@
     "angular-animate": "~1.2.26",
     "ngAnimate": "*",
     "textAngular": "~1.2.2",
-    "ngDialog": "~0.3.0"
+    "ngDialog": "~0.3.0",
+    "fontawesome": "~4.2.0"
   }
 }
