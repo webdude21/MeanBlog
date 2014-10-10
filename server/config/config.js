@@ -7,12 +7,17 @@ module.exports = {
         db: 'mongodb://localhost/meanblog',
         port: process.env.PORT || 1234
     },
+    production: {
+        rootPath: rootPath,
+        db: process.env.MONGOLAB_URI,
+        port: process.env.PORT || 1234
+    },
     identity: {
         roles: {
-            admin:'admin',
-            editor:'editor',
-            author:'author',
-            user:'user'
+            admin: 'admin',
+            editor: 'editor',
+            author: 'author',
+            user: 'user'
         }
     }
 };
