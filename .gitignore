@@ -55,7 +55,7 @@ build/
 [Bb]in/
 [Oo]bj/
 node_modules/
-/public/lib
+public/lib/
 
 # StyleCop
 *.StyleCop
