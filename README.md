@@ -1,6 +1,6 @@
 MeanBlog
 ========
-### Blog system using the M.E.A.N stack
+### Blog system made using the M.E.A.N stack
 
 ### The Application can be found live [here](http://meanestblog.herokuapp.com/)
 It can be tested with the following:
