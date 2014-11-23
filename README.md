@@ -2,11 +2,9 @@ MeanBlog
 ========
 ### Blog system using the M.E.A.N stack
 
-The Application can be found live [here](http://meanestblog.herokuapp.com/)
+### The Application can be found live [here](http://meanestblog.herokuapp.com/)
 It can be tested with the following:
-
-Login: admin
-Password: admin
+Login: admin and Password: admin
 
 Used technologies
 ------------
